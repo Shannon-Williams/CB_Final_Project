@@ -1,0 +1,9 @@
+{
+  "name": "CB_Final_Project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Shannon-Williams/CB_Final_Project.git",
+  "author": "Shannon Williams <shannon.w.williams03@gmail.com>",
+  "license": "MIT",
+  "dependencies": {}
+}
