@@ -1,8 +1,16 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import LoginButton from "./components/LoginButton";
+import LogoutButton from "./components/LogoutButton";
 
 function App() {
   const [message, setMessage] = useState("No message");
+  const { user } = useAuth0();
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   useEffect(() => {
     fetch("/api/test")
@@ -11,7 +19,9 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      <div>Hello World from client, My Message {message}</div>;
+      <div>Hello World from client, My Message {message}</div>
+      <LoginButton />
+      <LogoutButton />
       <Routes>
         <Route path="/" element={<div>HomePage</div>} />
         <Route

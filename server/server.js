@@ -5,12 +5,18 @@ const port = 8000;
 const jikanURL = "https://api.jikan.moe/v4/anime";
 // `https://api.jikan.moe/v4/anime?q=${query}`
 
+app.use(express.json());
+
 const {
   getAnimeSearchByQuery,
   getAnimeGenres,
   getAnimeSearchById,
 } = require("./jikanHandlers");
 
+const { addUser } = require("./dbHandlers");
+
+// Database Endpoints
+app.post("/api/user", addUser);
 app.get("/api/test", (req, res) => {
   console.log("I am being called");
   res.status(200).json({ message: "HomePage! From Server" });
