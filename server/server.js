@@ -13,14 +13,17 @@ const {
   getAnimeSearchById,
 } = require("./jikanHandlers");
 
-const { addUser } = require("./dbHandlers");
+const { addUser, addToFavourites } = require("./dbHandlers");
 
-// Database Endpoints
-app.post("/api/user", addUser);
+//Test endpoint
 app.get("/api/test", (req, res) => {
   console.log("I am being called");
   res.status(200).json({ message: "HomePage! From Server" });
 });
+
+// Database Endpoints
+app.post("/api/user", addUser);
+app.post("/api/favourite", addToFavourites);
 
 // JikanAPI Endpoints
 app.get("/api/anime/id/:malId", getAnimeSearchById);
