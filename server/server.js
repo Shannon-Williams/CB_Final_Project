@@ -13,7 +13,12 @@ const {
   getAnimeSearchById,
 } = require("./jikanHandlers");
 
-const { addUser, addToFavourites } = require("./dbHandlers");
+const {
+  addUser,
+  addToFavourites,
+  getFavourites,
+  deleteFromFavourites,
+} = require("./dbHandlers");
 
 //Test endpoint
 app.get("/api/test", (req, res) => {
@@ -24,6 +29,8 @@ app.get("/api/test", (req, res) => {
 // Database Endpoints
 app.post("/api/user", addUser);
 app.post("/api/favourite", addToFavourites);
+app.get("/api/favourite", getFavourites);
+app.delete("/api/favourite", deleteFromFavourites);
 
 // JikanAPI Endpoints
 app.get("/api/anime/id/:malId", getAnimeSearchById);
