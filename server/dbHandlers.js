@@ -342,6 +342,67 @@ const updateRatings = async (req, res) => {
   }
 };
 
+const addComment = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  const comment = req.body;
+
+  const value = comment;
+
+  try {
+    const result = await db.collection("comments").insertOne(value);
+
+    result
+      ? res.status(200).json({ data: result, message: "Comment Added" })
+      : res.status(404).json({ data: result, message: "Something Went Wrong" });
+
+    client.close();
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+const getComments = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  const query = { anime_id: 20 }; // should be user id from the request
+  const result = await db.collection("comments").find(query).toArray();
+
+  result
+    ? res.status(200).json({
+        data: result,
+        message: "Comments Found",
+      })
+    : res.status(404).json({
+        data: result,
+        message: "Something Went Wrong",
+      });
+
+  client.close();
+};
+
+const deleteComment = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  const query = { _id: "12" }; // should be user id from the request
+  const result = await db.collection("comments").deleteOne(query);
+
+  result
+    ? res.status(200).json({
+        data: result,
+        message: "Comment Deleted",
+      })
+    : res.status(404).json({
+        data: result,
+        message: "Something Went Wrong",
+      });
+
+  client.close();
+};
+
 module.exports = {
   addUser,
   addToFavourites,
@@ -356,4 +417,7 @@ module.exports = {
   addRatings,
   getRatings,
   updateRatings,
+  addComment,
+  getComments,
+  deleteComment,
 };

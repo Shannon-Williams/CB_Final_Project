@@ -27,6 +27,9 @@ const {
   addRatings,
   getRatings,
   updateRatings,
+  addComment,
+  getComments,
+  deleteComment,
 } = require("./dbHandlers");
 
 //Test endpoint
@@ -49,6 +52,9 @@ app.delete("/api/history", deleteFromHistory);
 app.post("/api/rating", addRatings);
 app.get("/api/rating", getRatings);
 app.get("/api/test/rating", updateRatings);
+app.post("/api/comments", addComment);
+app.get("/api/comments", getComments);
+app.delete("/api/comments", deleteComment);
 
 // JikanAPI Endpoints
 app.get("/api/anime/id/:malId", getAnimeSearchById);
