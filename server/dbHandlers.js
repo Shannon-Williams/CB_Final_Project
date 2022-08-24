@@ -25,6 +25,7 @@ const addUser = async (req, res) => {
         favourites: [],
         watchlist: [],
         history: [],
+        ratings: [],
       },
     };
     const existingUser = await db
@@ -66,6 +67,8 @@ const addToFavourites = async (req, res) => {
     animeAddedToFavorites
       ? res.status(200).json({ message: "Anime Added" })
       : res.status(404).json({ message: "Something Went Wrong" });
+
+    client.close();
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
   }
@@ -89,6 +92,7 @@ const getFavourites = async (req, res) => {
         data: favouritesAnimeList,
         message: "Something Went Wrong",
       });
+  client.close();
 };
 
 const deleteFromFavourites = async (req, res) => {
@@ -140,6 +144,8 @@ const addToWatchlist = async (req, res) => {
     animeAddedToWatchlist
       ? res.status(200).json({ message: "Anime Added" })
       : res.status(404).json({ message: "Something Went Wrong" });
+
+    client.close();
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
   }
@@ -163,6 +169,8 @@ const getWatchlist = async (req, res) => {
         data: watchlistAnimeList,
         message: "Something Went Wrong",
       });
+
+  client.close();
 };
 
 const deleteFromWatchlist = async (req, res) => {
@@ -214,6 +222,121 @@ const addToHistory = async (req, res) => {
     animeAddedToWatchlist
       ? res.status(200).json({ message: "Anime Added" })
       : res.status(404).json({ message: "Something Went Wrong" });
+
+    client.close();
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+const getHistory = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  const query = { _id: "1234" }; // should be user id from the request
+  const result = await db.collection("users").findOne(query);
+
+  const historyAnimeList = result?.profile?.history;
+
+  result
+    ? res.status(200).json({
+        data: historyAnimeList,
+        message: "history Anime Found",
+      })
+    : res.status(404).json({
+        data: historyAnimeList,
+        message: "Something Went Wrong",
+      });
+};
+
+const deleteFromHistory = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  try {
+    const query = { _id: "1234" }; // should be user id from the request
+    const value = {
+      $pull: { "profile.history": { name: "mob" } }, // should be anime id
+    };
+
+    const deletedAnime = await db
+      .collection("users")
+      .findOneAndUpdate(query, value);
+
+    deletedAnime.lastErrorObject.updatedExisting
+      ? res.status(201).json({
+          data: deletedAnime,
+          message: "Deleted Anime Found",
+        })
+      : res.status(404).json({
+          data: deletedAnime,
+          message: "Something Went Wrong",
+        });
+
+    client.close();
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+const addRatings = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  const ratedAnime = req.body;
+
+  const value = ratedAnime;
+
+  try {
+    const animeAddedToRatings = await db.collection("ratings").insertOne(value);
+
+    animeAddedToRatings
+      ? res.status(200).json({ message: "Rating Added" })
+      : res.status(404).json({ message: "Something Went Wrong" });
+
+    client.close();
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+const getRatings = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  const query = { user_id: "1234" }; // should be user id from the request
+  const result = await db.collection("ratings").find(query).toArray();
+
+  result
+    ? res.status(200).json({
+        data: result,
+        message: "Rating Found",
+      })
+    : res.status(404).json({
+        data: result,
+        message: "Something Went Wrong",
+      });
+
+  client.close();
+};
+
+const updateRatings = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  const query = {
+    _id: "1234",
+    name: "mob",
+  }; // should be user id from the request
+  const value = {
+    $set: { rating: 1 },
+  };
+
+  const result = await db.collection("ratings").updateOne(query, value);
+
+  try {
+    res.status(200).json({ data: result, message: "is this working" });
+    client.close();
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
   }
@@ -228,4 +351,9 @@ module.exports = {
   getWatchlist,
   deleteFromWatchlist,
   addToHistory,
+  getHistory,
+  deleteFromHistory,
+  addRatings,
+  getRatings,
+  updateRatings,
 };

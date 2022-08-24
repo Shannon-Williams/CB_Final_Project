@@ -22,6 +22,11 @@ const {
   getWatchlist,
   deleteFromWatchlist,
   addToHistory,
+  getHistory,
+  deleteFromHistory,
+  addRatings,
+  getRatings,
+  updateRatings,
 } = require("./dbHandlers");
 
 //Test endpoint
@@ -39,6 +44,11 @@ app.post("/api/watchlist", addToWatchlist);
 app.get("/api/watchlist", getWatchlist);
 app.delete("/api/watchlist", deleteFromWatchlist);
 app.post("/api/history", addToHistory);
+app.get("/api/history", getHistory);
+app.delete("/api/history", deleteFromHistory);
+app.post("/api/rating", addRatings);
+app.get("/api/rating", getRatings);
+app.get("/api/test/rating", updateRatings);
 
 // JikanAPI Endpoints
 app.get("/api/anime/id/:malId", getAnimeSearchById);
