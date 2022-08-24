@@ -18,6 +18,10 @@ const {
   addToFavourites,
   getFavourites,
   deleteFromFavourites,
+  addToWatchlist,
+  getWatchlist,
+  deleteFromWatchlist,
+  addToHistory,
 } = require("./dbHandlers");
 
 //Test endpoint
@@ -31,6 +35,10 @@ app.post("/api/user", addUser);
 app.post("/api/favourite", addToFavourites);
 app.get("/api/favourite", getFavourites);
 app.delete("/api/favourite", deleteFromFavourites);
+app.post("/api/watchlist", addToWatchlist);
+app.get("/api/watchlist", getWatchlist);
+app.delete("/api/watchlist", deleteFromWatchlist);
+app.post("/api/history", addToHistory);
 
 // JikanAPI Endpoints
 app.get("/api/anime/id/:malId", getAnimeSearchById);
