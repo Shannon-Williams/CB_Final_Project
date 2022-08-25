@@ -329,7 +329,7 @@ const updateRatings = async (req, res) => {
     name: "mob",
   }; // should be user id from the request
   const value = {
-    $set: { rating: 1 },
+    $set: req.body,
   };
 
   const result = await db.collection("ratings").updateOne(query, value);
