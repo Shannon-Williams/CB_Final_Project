@@ -12,8 +12,8 @@ root.render(
     domain={domain}
     clientId={clientId}
     redirectUri={"http://localhost:3000/loggedin"}
-    audience="https://dev-u-gbqqbo.us.auth0.com/api/v2/"
-    scope="read:current_user update:current_user_metadata"
+    audience="https://concordiabootcamp/final_project"
+    scope="openid%20profile%20email&"
   >
     <App />
   </Auth0Provider>
