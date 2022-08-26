@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import GlobalStyles from "./components/styled/GlobalStyles";
 import LoginButton from "./components/LoginButton";
 import LogoutButton from "./components/LogoutButton";
 
@@ -45,6 +46,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <GlobalStyles />
       <div>Hello World from client, My Message {message}</div>
       <LoginButton />
       <LogoutButton />
