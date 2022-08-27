@@ -32,11 +32,12 @@ const addUser = async (req, res) => {
       .collection("users")
       .findOne({ _id: req.body.sub });
 
-    if (req.body.sub === undefined) {
+    if (req.body.sub === "undefined") {
       res.status(200).json({ message: `initial check` });
+      return;
     }
 
-    if (!existingUser) {
+    if (!existingUser && req.body.sub !== undefined) {
       const userAdded = await db.collection("users").insertOne(newUser);
       userAdded
         ? res.status(200).json({ data: userAdded, message: "User Added" })
@@ -44,7 +45,7 @@ const addUser = async (req, res) => {
             .status(404)
             .json({ data: userAdded, message: "Something Went Wrong" });
     } else {
-      res.status(500).json({ message: "User Already Exists" });
+      res.status(200).json({ message: "User Already Exists" });
     }
     client.close();
   } catch (err) {
