@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import GlobalStyles from "./components/styled/GlobalStyles";
 import Layout from "./components/styled/Layout";
-import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton";
+import LoginPage from "./components/LoginPage";
 
 function App() {
   const [message, setMessage] = useState("No message");
@@ -70,6 +69,7 @@ function App() {
           <Route path="/anime/:id" element={<div>Anime Details</div>} />
           <Route path="/signin" element={<div>sign in page</div>} />
           <Route path="/signout" element={<div>sign out page</div>} />
+          <Route path="/loggedin" element={<LoginPage />} />
           <Route path="*" element={<div>404 Error</div>} />
         </Routes>
       </Layout>

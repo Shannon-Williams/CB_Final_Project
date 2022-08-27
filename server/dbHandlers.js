@@ -18,9 +18,9 @@ const addUser = async (req, res) => {
 
     const newUser = {
       _id: req.body.sub,
-      userFirstname: req.body.userFirstName,
-      userLastname: req.body.userLastName,
-      userEmail: req.body.userEmail,
+      userFirstname: req.body.given_name,
+      userLastname: req.body.family_name,
+      userEmail: req.body.email,
       profile: {
         favourites: [],
         watchlist: [],
@@ -31,6 +31,10 @@ const addUser = async (req, res) => {
     const existingUser = await db
       .collection("users")
       .findOne({ _id: req.body.sub });
+
+    if (req.body.sub === undefined) {
+      res.status(200).json({ message: `initial check` });
+    }
 
     if (!existingUser) {
       const userAdded = await db.collection("users").insertOne(newUser);

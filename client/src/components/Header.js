@@ -1,12 +1,35 @@
 import styled from "styled-components";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
 
 const Header = ({}) => {
-  return <Wrapper>Header</Wrapper>;
+  return (
+    <Wrapper>
+      <Logo>Header</Logo>
+      <ProfileContainer>
+        <ProfileButtonsContainer>
+          <LoginButton />
+          <LogoutButton />
+        </ProfileButtonsContainer>
+      </ProfileContainer>
+    </Wrapper>
+  );
 };
 
 export default Header;
 
 const Wrapper = styled.div`
   border: 1px black solid;
-  /* position: fixed; */
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Logo = styled.div``;
+
+const ProfileContainer = styled.div``;
+
+const ProfileButtonsContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
 `;
