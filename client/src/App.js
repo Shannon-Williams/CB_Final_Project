@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import GlobalStyles from "./components/styled/GlobalStyles";
 import Layout from "./components/styled/Layout";
 import LoginPage from "./components/LoginPage";
+import Homepage from "./pages/Homepage";
 
 function App() {
   const [message, setMessage] = useState("No message");
@@ -52,7 +53,7 @@ function App() {
         {/* <button onClick={callAPI}>Call API</button>
       <button onClick={callProtectedAPI}>Call Protected API</button> */}
         <Routes>
-          <Route path="/" element={<div>HomePage</div>} />
+          <Route path="/" element={<Homepage />} />
           <Route
             path="/profile"
             element={

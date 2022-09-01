@@ -1,13 +1,13 @@
 const fetch = require("node-fetch");
 
 const getAnimeSearchByQuery = async (req, res) => {
-  const { animeQuery } = req.params;
+  const { q, genre } = req.query;
   // const query = animeQuery.toLowercase();
-  console.log(`Animesearch`, animeQuery);
+  console.log(`Animesearch1 q`, q, `genre`, genre, `params`, req.query);
 
   const fetchAnimeSearch = async () => {
     const res = await fetch(
-      `https://api.jikan.moe/v4/anime?q=${animeQuery}&sfw`
+      `https://api.jikan.moe/v4/anime?q=${q}&sfw=true&type=tv`
     );
     const { data } = await res.json();
     return data;
