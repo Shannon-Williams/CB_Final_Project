@@ -7,7 +7,8 @@ import { useSearchParams } from "react-router-dom";
 const Searchbar = ({}) => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [genreTerm, setGenreTerm] = useState("All");
+  const [genreSelection, setGenreSelection] = useState("All");
+  const [genres, setGenres] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -23,6 +24,28 @@ const Searchbar = ({}) => {
     return data;
   };
 
+  const fetchGenres = async () => {
+    const res = await fetch(`/api/anime/genres`);
+    const { data } = await res.json();
+    setGenres(data);
+    console.log(data);
+    return data;
+  };
+
+  useEffect(() => {
+    fetchGenres();
+  }, []);
+
+  useEffect(() => {
+    const sortedGenres = genres
+      .sort((a, b) => {
+        return b.count - a.count;
+      })
+      .slice(0, 12);
+
+    console.log(`sorted`, sortedGenres);
+  }, [genres]);
+
   useEffect(() => {
     console.log(searchResults);
   }, [searchResults]);
@@ -36,7 +59,7 @@ const Searchbar = ({}) => {
   // }, [search]);
 
   const HandleSearch = () => {
-    setSearchParams({ q: `${search}`, genre: `${genreTerm}` });
+    setSearchParams({ q: `${search}`, genre: `${genreSelection}` });
     fetchAnimeSearchResults();
     setSearch("");
   };
