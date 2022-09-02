@@ -8,7 +8,7 @@ const {
 } = require("../dbHandlers");
 
 router.post("/", addToFavourites);
-router.get("/", getFavourites);
+router.get("/:id", getFavourites);
 router.delete("/", deleteFromFavourites);
 
 module.exports = router;

@@ -6,6 +6,7 @@ import Layout from "./components/styled/Layout";
 import LoginPage from "./components/LoginPage";
 import Homepage from "./pages/Homepage";
 import AnimeDetails from "./pages/AnimeDetails";
+import Profile from "./pages/Profile";
 
 function App() {
   const [message, setMessage] = useState("No message");
@@ -55,14 +56,7 @@ function App() {
       <button onClick={callProtectedAPI}>Call Protected API</button> */}
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route
-            path="/profile"
-            element={
-              <div>
-                Profile Page <Outlet />
-              </div>
-            }
-          >
+          <Route path="/profile" element={<Profile />}>
             <Route
               path=":profileTypeId"
               element={<div>Your Anime Lists</div>}

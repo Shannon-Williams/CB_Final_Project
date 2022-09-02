@@ -53,15 +53,37 @@ const addUser = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  const query = { _id: "1234" }; // should be user id from the request
+  const result = await db.collection("users").findOne(query);
+
+  const favouritesAnimeList = result?.profile?.favourites;
+
+  result
+    ? res.status(200).json({
+        data: favouritesAnimeList,
+        message: "Favourite Anime Found",
+      })
+    : res.status(404).json({
+        data: favouritesAnimeList,
+        message: "Something Went Wrong",
+      });
+  client.close();
+};
+
 const addToFavourites = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const anime = req.body;
+  const { name, id } = req.body;
 
-  const query = { _id: "1234" }; // should be user id from the request
+  console.log(`dbH add to fav`, id);
+  const query = { _id: id }; // should be user id from the request
   const favouritedAnime = {
-    $addToSet: { "profile.favourites": anime },
+    $addToSet: { "profile.favourites": name },
   };
 
   try {
@@ -80,6 +102,8 @@ const addToFavourites = async (req, res) => {
 };
 
 const getFavourites = async (req, res) => {
+  const { id } = req.params;
+  console.log(`dbH add to fav`, id);
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
