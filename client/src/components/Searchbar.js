@@ -3,6 +3,7 @@ import Button from "./styled/elements/Button";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import AnimeList from "./AnimeList";
 
 const Searchbar = ({}) => {
   const [search, setSearch] = useState("");
@@ -43,12 +44,12 @@ const Searchbar = ({}) => {
       })
       .slice(0, 12);
 
-    console.log(`sorted`, sortedGenres);
+    // console.log(`sorted`, sortedGenres);
   }, [genres]);
 
-  useEffect(() => {
-    console.log(searchResults);
-  }, [searchResults]);
+  // useEffect(() => {
+  //   console.log(searchResults);
+  // }, [searchResults]);
 
   // This will be for a search page
   // useEffect(() => {
@@ -76,7 +77,8 @@ const Searchbar = ({}) => {
         />
         <Button onClick={HandleSearch}>Search</Button>
       </Wrapper>
-      {JSON.stringify(searchResults[0])}
+      {/* {JSON.stringify(searchResults[0])} */}
+      <AnimeList key={"animelist"} animeList={searchResults} />
     </>
   );
 };
