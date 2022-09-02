@@ -7,7 +7,7 @@ const {
   getAnimeSearchById,
 } = require("../jikanHandlers");
 
-router.get("/id/:malId", getAnimeSearchById);
+router.get("/id/:id", getAnimeSearchById);
 router.get(`/search/`, getAnimeSearchByQuery);
 router.get(`/genres`, getAnimeGenres);
 

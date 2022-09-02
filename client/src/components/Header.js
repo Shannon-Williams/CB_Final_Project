@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
+import { Link } from "react-router-dom";
 
 const Header = ({}) => {
   return (
     <Wrapper>
-      <Logo>Header</Logo>
+      <Link style={{ textDecoration: "none" }} to={`/`}>
+        <Logo>Header</Logo>
+      </Link>
       <ProfileContainer>
         <ProfileButtonsContainer>
           <LoginButton />

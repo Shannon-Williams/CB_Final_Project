@@ -19,9 +19,10 @@ const getAnimeSearchByQuery = async (req, res) => {
 };
 
 const getAnimeSearchById = async (req, res) => {
-  const { malId } = req.params;
+  const { id } = req.params;
+  console.log(`API id is `, id);
   const fetchAnimeSearch = async () => {
-    const res = await fetch(`https://api.jikan.moe/v4/anime/${malId}/full`);
+    const res = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
     const { data } = await res.json();
     return data;
   };

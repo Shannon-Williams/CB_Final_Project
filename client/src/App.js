@@ -5,6 +5,7 @@ import GlobalStyles from "./components/styled/GlobalStyles";
 import Layout from "./components/styled/Layout";
 import LoginPage from "./components/LoginPage";
 import Homepage from "./pages/Homepage";
+import AnimeDetails from "./pages/AnimeDetails";
 
 function App() {
   const [message, setMessage] = useState("No message");
@@ -67,7 +68,7 @@ function App() {
               element={<div>Your Anime Lists</div>}
             />
           </Route>
-          <Route path="/anime/:id" element={<div>Anime Details</div>} />
+          <Route path="/anime/:id" element={<AnimeDetails />} />
           <Route path="/signin" element={<div>sign in page</div>} />
           <Route path="/signout" element={<div>sign out page</div>} />
           <Route path="/loggedin" element={<LoginPage />} />
