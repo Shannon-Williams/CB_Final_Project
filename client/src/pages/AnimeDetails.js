@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CommentSection from "../components/CommentSection";
 
 const AnimeDetails = () => {
   const { id } = useParams();
+  const [comments, setComments] = useState();
 
   const [loading, setLoading] = useState(false);
 
@@ -17,11 +19,25 @@ const AnimeDetails = () => {
     return data;
   };
 
+  const fetchCommentSection = async () => {
+    const res = await fetch(`/api/comments/${id}`);
+    const { data } = await res.json();
+    console.log(`anime comments data`, data);
+    setComments(data);
+    return data;
+  };
+
   useEffect(() => {
     fetchAnimeFullDetails();
+    fetchCommentSection();
   }, [id]);
 
-  return <div>ANime Details</div>;
+  return (
+    <>
+      Anime Details
+      {comments && <CommentSection comments={comments} />}
+    </>
+  );
 };
 
 export default AnimeDetails;

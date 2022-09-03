@@ -401,7 +401,9 @@ const getComments = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const query = { anime_id: 20 }; // should be user id from the request
+  console.log(`Params `, req.params);
+  const { anime_id } = req.params;
+  const query = { anime_id: Number(anime_id) }; // should be user id from the request
   const result = await db.collection("comments").find(query).toArray();
 
   result
