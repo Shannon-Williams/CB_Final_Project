@@ -7,11 +7,15 @@ import styled from "styled-components";
 const AnimeCard = ({ anime }) => {
   const { user } = useAuth0();
 
-  const postToFavourties = async (anime) => {
-    const res = fetch(`/api/favourite`, {
+  const postToFavourties = async () => {
+    console.log(`Anime is this`, anime);
+    const res = await fetch(`/api/favourite`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(anime),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: user.sub, anime: anime }),
     });
   };
 
@@ -27,14 +31,7 @@ const AnimeCard = ({ anime }) => {
           <h3>{anime?.title}</h3>
         </StyledAnimeCard>
       </Link>
-      {user && (
-        <FavouriteButton
-          onClickFunc={() => {
-            console.log(`test`);
-            console.log(`On Click anime`, anime);
-          }}
-        />
-      )}
+      {user && <FavouriteButton onClickFunc={postToFavourties} />}
     </Wrapper>
   );
 };

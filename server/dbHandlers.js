@@ -78,12 +78,13 @@ const addToFavourites = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const { name, id } = req.body;
+
+  const { anime, id } = req.body;
 
   console.log(`dbH add to fav`, id);
   const query = { _id: id }; // should be user id from the request
   const favouritedAnime = {
-    $addToSet: { "profile.favourites": name },
+    $addToSet: { "profile.favourites": anime },
   };
 
   try {
