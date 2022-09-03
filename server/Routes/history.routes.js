@@ -8,7 +8,7 @@ const {
 } = require("../dbHandlers");
 
 router.post("/", addToHistory);
-router.get("/", getHistory);
+router.get("/:id", getHistory);
 router.delete("/", deleteFromHistory);
 
 module.exports = router;

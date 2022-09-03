@@ -5,14 +5,30 @@ import { useEffect } from "react";
 const Profile = ({}) => {
   const { user, isLoading } = useAuth0();
 
-  const fetchUserProfile = async () => {
+  const fetchFavourtieProfile = async () => {
     const res = await fetch(`/api/favourite/${user?.sub}`);
     const { data } = await res.json();
-    console.log(`Profile`, data);
+    console.log(`Profile:favourite`, data);
     return data;
   };
+
+  const fetchWatchlistProfile = async () => {
+    const res = await fetch(`/api/watchlist/${user?.sub}`);
+    const { data } = await res.json();
+    console.log(`Profile:watchlist`, data);
+    return data;
+  };
+
+  const fetchHistoryProfile = async () => {
+    const res = await fetch(`/api/history/${user?.sub}`);
+    const { data } = await res.json();
+    console.log(`Profile:watchlist`, data);
+    return data;
+  };
+
   useEffect(() => {
-    fetchUserProfile();
+    fetchFavourtieProfile();
+    fetchWatchlistProfile();
   }, []);
 
   return (

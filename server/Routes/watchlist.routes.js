@@ -8,7 +8,7 @@ const {
 } = require("../dbHandlers");
 
 router.post("/", addToWatchlist);
-router.get("/", getWatchlist);
+router.get("/:id", getWatchlist);
 router.delete("/", deleteFromWatchlist);
 
 module.exports = router;

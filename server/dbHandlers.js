@@ -159,10 +159,11 @@ const addToWatchlist = async (req, res) => {
   await client.connect();
   const db = client.db("finalProject");
   const anime = req.body;
+  const { name, id } = req.body;
 
-  const query = { _id: "1234" }; // should be user id from the request
+  const query = { _id: id }; // should be user id from the request
   const value = {
-    $addToSet: { "profile.watchlist": anime },
+    $addToSet: { "profile.watchlist": name },
   };
 
   try {
@@ -184,6 +185,8 @@ const getWatchlist = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
+  const { id } = req.params;
+  console.log(`dbH add to wl`, id);
   const query = { _id: "1234" }; // should be user id from the request
   const result = await db.collection("users").findOne(query);
 
