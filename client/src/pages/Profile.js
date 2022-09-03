@@ -22,14 +22,17 @@ const Profile = ({}) => {
   const fetchHistoryProfile = async () => {
     const res = await fetch(`/api/history/${user?.sub}`);
     const { data } = await res.json();
-    console.log(`Profile:watchlist`, data);
+    console.log(`Profile:History`, data);
     return data;
   };
 
   useEffect(() => {
-    fetchFavourtieProfile();
-    fetchWatchlistProfile();
-  }, []);
+    if (user) {
+      fetchFavourtieProfile();
+      fetchWatchlistProfile();
+      fetchHistoryProfile();
+    }
+  }, [user]);
 
   return (
     <div>

@@ -103,11 +103,11 @@ const addToFavourites = async (req, res) => {
 
 const getFavourites = async (req, res) => {
   const { id } = req.params;
-  console.log(`dbH add to fav`, id);
+  console.log(`dbH add to fav this should be define`, id);
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const query = { _id: "1234" }; // should be user id from the request
+  const query = { _id: id }; // should be user id from the request
   const result = await db.collection("users").findOne(query);
 
   const favouritesAnimeList = result?.profile?.favourites;
@@ -187,7 +187,7 @@ const getWatchlist = async (req, res) => {
   const db = client.db("finalProject");
   const { id } = req.params;
   console.log(`dbH add to wl`, id);
-  const query = { _id: "1234" }; // should be user id from the request
+  const query = { _id: id }; // should be user id from the request
   const result = await db.collection("users").findOne(query);
 
   const watchlistAnimeList = result?.profile?.watchlist;
@@ -239,11 +239,11 @@ const addToHistory = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const anime = req.body;
-
-  const query = { _id: "1234" }; // should be user id from the request
+  // const anime = req.body;
+  const { name, id } = req.body;
+  const query = { _id: id }; // should be user id from the request
   const value = {
-    $addToSet: { "profile.history": anime },
+    $addToSet: { "profile.history": name },
   };
 
   try {
@@ -265,7 +265,8 @@ const getHistory = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const query = { _id: "1234" }; // should be user id from the request
+  const { id } = req.params;
+  const query = { _id: id }; // should be user id from the request
   const result = await db.collection("users").findOne(query);
 
   const historyAnimeList = result?.profile?.history;
