@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CommentSection from "../components/CommentSection";
+import CommentPost from "../components/CommentPost";
 
 const AnimeDetails = () => {
   const { id } = useParams();
-  const [comments, setComments] = useState();
-
+  const [commentFeed, setCommentFeed] = useState();
   const [loading, setLoading] = useState(false);
 
   console.log(`param is`, id);
@@ -19,23 +19,25 @@ const AnimeDetails = () => {
     return data;
   };
 
-  const fetchCommentSection = async () => {
+  const fetchCommentSection = async (id) => {
+    console.log(`fetchCommentSection`, id);
     const res = await fetch(`/api/comments/${id}`);
     const { data } = await res.json();
     console.log(`anime comments data`, data);
-    setComments(data);
+    setCommentFeed(data);
     return data;
   };
 
   useEffect(() => {
     fetchAnimeFullDetails();
-    fetchCommentSection();
+    fetchCommentSection(id);
   }, [id]);
 
   return (
     <>
       Anime Details
-      {comments && <CommentSection comments={comments} />}
+      <CommentPost animeId={id} fetchCommentSection={fetchCommentSection} />
+      {commentFeed && <CommentSection comments={commentFeed} />}
     </>
   );
 };

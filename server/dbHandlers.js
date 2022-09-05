@@ -1,4 +1,5 @@
 const { MongoClient } = require("mongodb");
+const { v4: uuidv4 } = require("uuid");
 
 require("dotenv").config();
 const { MONGO_URI } = process.env;
@@ -380,9 +381,15 @@ const addComment = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const comment = req.body;
 
-  const value = comment;
+  const { anime_id, user_id, comment } = req.body;
+
+  const value = {
+    _id: uuidv4(),
+    user_id: user_id,
+    anime_id: Number(anime_id),
+    comment: comment,
+  };
 
   try {
     const result = await db.collection("comments").insertOne(value);
