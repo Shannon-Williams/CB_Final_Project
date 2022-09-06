@@ -319,20 +319,26 @@ const addRatings = async (req, res) => {
   await client.connect();
   const db = client.db("finalProject");
   const { user_id, anime_id, rating } = req.body;
+  // console.log(`addRatins`, req.body);
   const query = { user_id: user_id, anime_id: Number(anime_id) };
 
   try {
     const isRated = await db.collection("ratings").findOne(query);
 
+    // console.log(`is rated `, isRated, typeof isRated);
+
     if (isRated) {
       const updateAnimeRating = await db
         .collection("ratings")
-        .updateOne(query, { $set: { rating: rating } });
+        .updateOne(query, { $set: { rating: Number(rating) } });
       res.status(200).json({ message: "Rating Updated" });
     } else {
-      const animeAddedToRatings = await db
-        .collection("ratings")
-        .insertOne({ _id: uuidv4(), ...req.body });
+      const animeAddedToRatings = await db.collection("ratings").insertOne({
+        _id: uuidv4(),
+        user_id: user_id,
+        anime_id: Number(anime_id),
+        rating: Number(rating),
+      });
 
       res.status(200).json({ data: isRated, message: "Rating Added" });
     }
@@ -363,7 +369,7 @@ const getRatings = async (req, res) => {
           data: result,
           message: "Rating Found",
         })
-      : res.status(404).json({
+      : res.status(200).json({
           data: result,
           message: "Something Went Wrong",
         });

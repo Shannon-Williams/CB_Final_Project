@@ -6,21 +6,38 @@ import styled from "styled-components";
 const AnimeRating = ({ initialRating = 0, animeId }) => {
   const [rating, setRating] = useState(initialRating);
   const [hover, setHover] = useState(null);
-  let { user } = useAuth0();
+  let { user, isLoading } = useAuth0();
+
   const fetchAnimeRating = async () => {
     const res = await fetch(
       `/api/rating/?user_id=${user?.sub}&anime_id=${animeId}`
     );
 
     const data = await res.json();
-    setRating(data.data.rating);
+    console.log(`getRating data`, data);
+    setRating(data?.data?.rating);
+  };
+
+  const postAnimeRating = async (rating) => {
+    const res = await fetch(`/api/rating`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_id: user.sub,
+        anime_id: animeId,
+        rating: rating,
+      }),
+    });
   };
 
   useEffect(() => {
     console.log(`animeid`, animeId);
-    if (user) {
-      fetchAnimeRating();
-    }
+    console.log(`animerating user`, user);
+
+    fetchAnimeRating();
   }, [user]);
 
   useEffect(() => {
@@ -32,7 +49,13 @@ const AnimeRating = ({ initialRating = 0, animeId }) => {
         const ratingValue = index + 1;
         // console.log(ratingValue, index);
         return (
-          <label key={index} onClick={() => setRating(ratingValue)}>
+          <label
+            key={index}
+            onClick={() => {
+              setRating(ratingValue);
+              postAnimeRating(rating);
+            }}
+          >
             <StarInput type={"radio"} name={"rating"} value={ratingValue} />
             <FaStar
               size={100}
