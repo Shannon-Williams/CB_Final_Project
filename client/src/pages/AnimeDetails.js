@@ -37,7 +37,7 @@ const AnimeDetails = () => {
   return (
     <>
       Anime Details
-      <AnimeRating />
+      <AnimeRating animeId={id} />
       <CommentPost animeId={id} fetchCommentSection={fetchCommentSection} />
       {commentFeed && <CommentSection comments={commentFeed} />}
     </>

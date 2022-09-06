@@ -1,10 +1,27 @@
+import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import styled from "styled-components";
 
-const AnimeRating = ({}) => {
-  const [rating, setRating] = useState(null);
+const AnimeRating = ({ initialRating = 0, animeId }) => {
+  const [rating, setRating] = useState(initialRating);
   const [hover, setHover] = useState(null);
+  let { user } = useAuth0();
+  const fetchAnimeRating = async () => {
+    const res = await fetch(
+      `/api/rating/?user_id=${user?.sub}&anime_id=${animeId}`
+    );
+
+    const data = await res.json();
+    setRating(data.data.rating);
+  };
+
+  useEffect(() => {
+    console.log(`animeid`, animeId);
+    if (user) {
+      fetchAnimeRating();
+    }
+  }, [user]);
 
   useEffect(() => {
     console.log(`rating`, rating);

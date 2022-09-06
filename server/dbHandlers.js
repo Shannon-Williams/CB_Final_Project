@@ -318,16 +318,24 @@ const addRatings = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const ratedAnime = req.body;
-
-  const value = ratedAnime;
+  const { user_id, anime_id, rating } = req.body;
+  const query = { user_id: user_id, anime_id: Number(anime_id) };
 
   try {
-    const animeAddedToRatings = await db.collection("ratings").insertOne(value);
+    const isRated = await db.collection("ratings").findOne(query);
 
-    animeAddedToRatings
-      ? res.status(200).json({ message: "Rating Added" })
-      : res.status(404).json({ message: "Something Went Wrong" });
+    if (isRated) {
+      const updateAnimeRating = await db
+        .collection("ratings")
+        .updateOne(query, { $set: { rating: rating } });
+      res.status(200).json({ message: "Rating Updated" });
+    } else {
+      const animeAddedToRatings = await db
+        .collection("ratings")
+        .insertOne({ _id: uuidv4(), ...req.body });
+
+      res.status(200).json({ data: isRated, message: "Rating Added" });
+    }
 
     client.close();
   } catch (err) {
@@ -336,23 +344,33 @@ const addRatings = async (req, res) => {
 };
 
 const getRatings = async (req, res) => {
+  const { id } = req.params;
+  const { user_id, anime_id } = req.query;
+  const query = { user_id: user_id, anime_id: Number(anime_id) };
+
+  console.log(`getRating `, query);
+
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const query = { user_id: "1234" }; // should be user id from the request
-  const result = await db.collection("ratings").find(query).toArray();
 
-  result
-    ? res.status(200).json({
-        data: result,
-        message: "Rating Found",
-      })
-    : res.status(404).json({
-        data: result,
-        message: "Something Went Wrong",
-      });
+  try {
+    const result = await db.collection("ratings").findOne(query);
+    console.log(`db res`, result);
 
-  client.close();
+    result
+      ? res.status(200).json({
+          data: result,
+          message: "Rating Found",
+        })
+      : res.status(404).json({
+          data: result,
+          message: "Something Went Wrong",
+        });
+    client.close();
+  } catch (error) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
 };
 
 const updateRatings = async (req, res) => {
