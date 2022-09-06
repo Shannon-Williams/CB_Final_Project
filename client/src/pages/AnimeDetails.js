@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CommentSection from "../components/CommentSection";
 import CommentPost from "../components/CommentPost";
+import AnimeRating from "../components/AnimeRating";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -36,6 +37,7 @@ const AnimeDetails = () => {
   return (
     <>
       Anime Details
+      <AnimeRating />
       <CommentPost animeId={id} fetchCommentSection={fetchCommentSection} />
       {commentFeed && <CommentSection comments={commentFeed} />}
     </>
