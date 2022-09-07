@@ -3,10 +3,13 @@ import { useParams } from "react-router-dom";
 import CommentSection from "../components/CommentSection";
 import CommentPost from "../components/CommentPost";
 import AnimeRating from "../components/AnimeRating";
+import styled from "styled-components";
+import { Image } from "../components/styled/AnimeCard.styled";
 
 const AnimeDetails = () => {
   const { id } = useParams();
   const [commentFeed, setCommentFeed] = useState();
+  const [animeDetails, setAnimeDetails] = useState(null);
   const [loading, setLoading] = useState(false);
 
   console.log(`param is`, id);
@@ -16,6 +19,7 @@ const AnimeDetails = () => {
     const res = await fetch(`/api/anime/id/${id}`);
     const { data } = await res.json();
     console.log(`anime details data`, data);
+    setAnimeDetails(data);
     setLoading(false);
     return data;
   };
@@ -32,16 +36,55 @@ const AnimeDetails = () => {
   useEffect(() => {
     fetchAnimeFullDetails();
     fetchCommentSection(id);
+    console.log(animeDetails);
   }, [id]);
 
   return (
-    <>
-      Anime Details
+    <Wrapper>
+      <AnimeTitle>{animeDetails?.title}</AnimeTitle>
+      <AnimeOverviewContainer>
+        <Image src={`${animeDetails?.images?.jpg?.large_image_url}`} />
+        <Overview>
+          <span>{animeDetails?.rating}</span>
+          <span>{animeDetails?.aired.string}</span>
+          <span>{animeDetails?.episodes}</span>
+          {/* {animeDetails?.genres.map((genre) => {
+            return <span>{genre.name}</span>;
+          })} */}
+          <span>
+            {animeDetails?.genres.map((genre) => {
+              return `${genre.name}, `;
+            })}
+          </span>
+          <span>{}</span>
+        </Overview>
+      </AnimeOverviewContainer>
+      <P>{animeDetails?.synopsis}</P>
       <AnimeRating animeId={id} />
       <CommentPost animeId={id} fetchCommentSection={fetchCommentSection} />
       {commentFeed && <CommentSection comments={commentFeed} />}
-    </>
+    </Wrapper>
   );
 };
 
 export default AnimeDetails;
+
+const Wrapper = styled.div`
+  border: 1px solid blue;
+  width: 1000px;
+`;
+
+const AnimeTitle = styled.h1`
+  margin: 1.5rem 0;
+  font-size: 2rem;
+`;
+
+const P = styled.p``;
+
+const AnimeOverviewContainer = styled.div`
+  display: flex;
+`;
+const Overview = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
