@@ -26,5 +26,7 @@ const HeaderContainer = styled.div`
 
 const MainContent = styled.div`
   border: 1px blue solid;
-  /* height: 95vh; */
+  height: 95vh;
+  display: flex;
+  justify-content: center;
 `;

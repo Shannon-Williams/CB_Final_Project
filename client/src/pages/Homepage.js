@@ -1,15 +1,14 @@
 import Searchbar from "../components/Searchbar";
-import AnimeRating from "../components/AnimeRating";
+import styled from "styled-components";
 
 const Homepage = ({}) => {
   return (
-    <div>
-      Homepage Page
+    <Wrapper>
       <Searchbar />
-      <AnimeRating />
-      {/*  */}
-    </div>
+    </Wrapper>
   );
 };
 
 export default Homepage;
+
+const Wrapper = styled.div``;

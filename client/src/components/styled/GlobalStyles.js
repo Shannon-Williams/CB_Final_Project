@@ -12,7 +12,9 @@ export default createGlobalStyle`
   */
 :root { 
   /* #224186 */
-  --test:#112960
+  --test:#112960;
+  --border: lightgray;
+  --darker-border: darkgray;
 }
 
   html, body, div, span, applet, object, iframe,
