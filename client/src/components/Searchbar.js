@@ -44,21 +44,7 @@ const Searchbar = ({}) => {
         return b.count - a.count;
       })
       .slice(0, 12);
-
-    // console.log(`sorted`, sortedGenres);
   }, [genres]);
-
-  // useEffect(() => {
-  //   console.log(searchResults);
-  // }, [searchResults]);
-
-  // This will be for a search page
-  // useEffect(() => {
-  //   // Search the api
-  //   setLoading(true);
-  //   fetchAnimeSearchResults();
-  //   setLoading(false);
-  // }, [search]);
 
   const HandleSearch = () => {
     setSearchParams({ q: `${search}`, genre: `${genreSelection}` });
@@ -93,6 +79,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  /* margin: 2rem 0 0 0; */
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -102,7 +89,7 @@ const Wrapper = styled.div`
 const SearchBarContainer = styled.div`
   border: 1px var(--border) solid;
   border-radius: 7px;
-  height: fit-content;
+  /* height: fit-content; */
   overflow: hidden;
   padding: 0.25rem 1rem;
   position: relative;

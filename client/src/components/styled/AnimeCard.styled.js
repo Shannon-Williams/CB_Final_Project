@@ -3,8 +3,10 @@ import styled from "styled-components";
 const StyledAnimeCard = styled.li`
   display: flex;
   flex-direction: column;
-  border: 1px solid green;
-  width: 125px;
+  border-radius: 10px;
+  overflow: hidden;
+  /* border: 1px solid green; */
+  width: 250px;
   /* height: 215px; */
 
   & :hover {

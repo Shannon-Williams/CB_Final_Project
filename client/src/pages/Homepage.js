@@ -11,4 +11,7 @@ const Homepage = ({}) => {
 
 export default Homepage;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  border: 1px blue solid;
+  width: 100%;
+`;

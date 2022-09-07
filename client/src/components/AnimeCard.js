@@ -19,19 +19,15 @@ const AnimeCard = ({ anime }) => {
     });
   };
 
-  const test = () => {
-    console.log(`test`);
-  };
-
   return (
     <Wrapper>
       <Link style={{ textDecoration: "none" }} to={`/anime/${anime.mal_id}`}>
         <StyledAnimeCard onClick={() => {}}>
           <Image src={`${anime?.images?.jpg?.large_image_url}`} />
-          <h3>{anime?.title}</h3>
+          {/* <h3>{anime?.title}</h3> */}
         </StyledAnimeCard>
       </Link>
-      {user && <FavouriteButton onClickFunc={postToFavourties} />}
+      {/* {user && <FavouriteButton onClickFunc={postToFavourties} />} */}
     </Wrapper>
   );
 };
