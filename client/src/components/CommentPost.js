@@ -1,5 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import Button from "./styled/elements/Button";
 
 const CommentPost = ({ animeId, fetchCommentSection }) => {
@@ -39,15 +40,15 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
         handleSubmit(e);
       }}
     >
-      Write Comment Here
+      <h3>Write Comment Here</h3>
       <div>
-        <textarea
+        <CommentInput
           placeholder="What did you think?"
           onChange={(e) => {
             setComment(e.target.value);
           }}
           value={comment}
-        ></textarea>
+        ></CommentInput>
         <Button type="Submit">Submit</Button>
       </div>
     </form>
@@ -55,3 +56,15 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
 };
 
 export default CommentPost;
+
+const CommentInput = styled.textarea`
+  height: 75px;
+  width: 80%;
+  padding: 0.5rem 0 0 1rem;
+  resize: none;
+  /* border: none; */
+
+  &:focus {
+    outline: none;
+  }
+`;

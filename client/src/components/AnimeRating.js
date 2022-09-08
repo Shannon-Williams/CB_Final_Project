@@ -3,20 +3,10 @@ import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import styled from "styled-components";
 
-const AnimeRating = ({ initialRating = 0, animeId }) => {
-  const [rating, setRating] = useState(initialRating);
+const AnimeRating = ({ animeId }) => {
+  const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
   let { user, isLoading } = useAuth0();
-
-  const fetchAnimeRating = async () => {
-    const res = await fetch(
-      `/api/rating/?user_id=${user?.sub}&anime_id=${animeId}`
-    );
-
-    const data = await res.json();
-    console.log(`getRating data`, data);
-    setRating(data?.data?.rating);
-  };
 
   const postAnimeRating = async (rating) => {
     const res = await fetch(`/api/rating`, {
@@ -33,6 +23,15 @@ const AnimeRating = ({ initialRating = 0, animeId }) => {
     });
   };
 
+  const fetchAnimeRating = async () => {
+    const res = await fetch(
+      `/api/rating/?user_id=${user?.sub}&anime_id=${animeId}`
+    );
+
+    const data = await res.json();
+    console.log(`getRating data`, data);
+    setRating(data?.data?.rating);
+  };
   useEffect(() => {
     console.log(`animeid`, animeId);
     console.log(`animerating user`, user);
