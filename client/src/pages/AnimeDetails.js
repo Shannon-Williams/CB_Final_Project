@@ -5,7 +5,8 @@ import CommentPost from "../components/CommentPost";
 import AnimeRating from "../components/AnimeRating";
 import styled from "styled-components";
 import { Image } from "../components/styled/AnimeCard.styled";
-
+import YoutubeEmbed from "../components/YoutubeEmbed";
+import Lists from "../components/Lists";
 const AnimeDetails = () => {
   const { id } = useParams();
   const [commentFeed, setCommentFeed] = useState();
@@ -45,22 +46,27 @@ const AnimeDetails = () => {
       <AnimeOverviewContainer>
         <Image src={`${animeDetails?.images?.jpg?.large_image_url}`} />
         <Overview>
-          <span>{animeDetails?.rating}</span>
-          <span>{animeDetails?.aired.string}</span>
-          <span>{animeDetails?.episodes}</span>
-          {/* {animeDetails?.genres.map((genre) => {
+          <Details>
+            <span>{animeDetails?.rating}</span>
+            <span>{animeDetails?.aired.string}</span>
+            <span>{animeDetails?.episodes}</span>
+            {/* {animeDetails?.genres.map((genre) => {
             return <span>{genre.name}</span>;
           })} */}
-          <span>
+            {/* <span>
             {animeDetails?.genres.map((genre) => {
               return `${genre.name}, `;
-            })}
-          </span>
-          <span>{}</span>
+            })} */}
+            <Lists list={animeDetails?.genres} />
+            <Lists list={animeDetails?.streaming} />
+            <span>{}</span>
+          </Details>
+          <EmbeddedVideo embedUrl={animeDetails?.trailer.embed_url} />
+          <AnimeRating animeId={id} />
         </Overview>
       </AnimeOverviewContainer>
       <P>{animeDetails?.synopsis}</P>
-      <AnimeRating animeId={id} />
+
       <CommentPost animeId={id} fetchCommentSection={fetchCommentSection} />
       {commentFeed && <CommentSection comments={commentFeed} />}
     </Wrapper>
@@ -85,6 +91,15 @@ const AnimeOverviewContainer = styled.div`
   display: flex;
 `;
 const Overview = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const EmbeddedVideo = styled(YoutubeEmbed)`
+  /* margin-top: 2rem; */
+`;
+
+const Details = styled.div`
   display: flex;
   flex-direction: column;
 `;

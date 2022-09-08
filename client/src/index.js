@@ -14,6 +14,8 @@ root.render(
     redirectUri={"http://localhost:3000/loggedin"}
     audience="https://concordiabootcamp/final_project"
     scope="openid%20profile%20email&"
+    useRefreshTokens={true}
+    cacheLocation="localstorage"
   >
     <App />
   </Auth0Provider>
