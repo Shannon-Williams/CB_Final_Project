@@ -48,7 +48,7 @@ const AnimeRating = ({ animeId }) => {
         const ratingValue = index + 1;
         // console.log(ratingValue, index);
         return (
-          <label
+          <Star
             key={index}
             onClick={() => {
               setRating(ratingValue);
@@ -66,7 +66,7 @@ const AnimeRating = ({ animeId }) => {
                 setHover(null);
               }}
             />
-          </label>
+          </Star>
         );
       })}
     </div>
