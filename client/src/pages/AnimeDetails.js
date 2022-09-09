@@ -47,27 +47,25 @@ const AnimeDetails = () => {
         <Image src={`${animeDetails?.images?.jpg?.large_image_url}`} />
         <Overview>
           <Details>
-            <span>{animeDetails?.rating}</span>
-            <span>{animeDetails?.aired.string}</span>
-            <span>{animeDetails?.episodes}</span>
-            {/* {animeDetails?.genres.map((genre) => {
-            return <span>{genre.name}</span>;
-          })} */}
-            {/* <span>
-            {animeDetails?.genres.map((genre) => {
-              return `${genre.name}, `;
-            })} */}
-            <Lists list={animeDetails?.genres} />
-            <Lists list={animeDetails?.streaming} />
+            <span>Rating: {animeDetails?.rating}</span>
+            <span>Aired: {animeDetails?.aired.string}</span>
+            <span>Episodes: {animeDetails?.episodes}</span>
+            <span>
+              Genre(s): <Lists list={animeDetails?.genres} />
+            </span>
+            <span>
+              Streaming:
+              <Lists list={animeDetails?.streaming} />
+            </span>
             <span>{}</span>
           </Details>
           <EmbeddedVideo embedUrl={animeDetails?.trailer.embed_url} />
           <AnimeRating animeId={id} />
+          <CommentPost animeId={id} fetchCommentSection={fetchCommentSection} />
         </Overview>
       </AnimeOverviewContainer>
       <P>{animeDetails?.synopsis}</P>
 
-      <CommentPost animeId={id} fetchCommentSection={fetchCommentSection} />
       {commentFeed && <CommentSection comments={commentFeed} />}
     </Wrapper>
   );

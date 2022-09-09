@@ -30,9 +30,9 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     postComment();
+    fetchCommentSection(animeId);
     console.log(`posted Comment =`, comment);
     setComment("");
-    fetchCommentSection(animeId);
   };
   return (
     <form
@@ -41,7 +41,7 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
       }}
     >
       <h3>Write Comment Here</h3>
-      <div>
+      <CommentContainer>
         <CommentInput
           placeholder="What did you think?"
           onChange={(e) => {
@@ -49,8 +49,8 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
           }}
           value={comment}
         ></CommentInput>
-        <Button type="Submit">Submit</Button>
-      </div>
+        <CommentButton type="Submit">Submit</CommentButton>
+      </CommentContainer>
     </form>
   );
 };
@@ -62,9 +62,23 @@ const CommentInput = styled.textarea`
   width: 80%;
   padding: 0.5rem 0 0 1rem;
   resize: none;
-  /* border: none; */
+  border: none;
 
   &:focus {
     outline: none;
   }
+`;
+
+const CommentButton = styled(Button)`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  border-radius: 10px;
+`;
+
+const CommentContainer = styled.div`
+  position: relative;
+  border: 1px solid gray;
 `;
