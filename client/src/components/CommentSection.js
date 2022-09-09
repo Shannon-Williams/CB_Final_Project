@@ -3,7 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const CommentSection = ({ comments }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   let { user } = useAuth0();
 
   return (
