@@ -6,9 +6,6 @@ const AnimeList = ({ animeList }) => {
   return (
     <StyledAnimeList>
       {animeList.map((anime) => {
-        {
-          console.log(anime?.title_english);
-        }
         return <AnimeCard key={anime.mal_id} anime={anime} />;
       })}
     </StyledAnimeList>

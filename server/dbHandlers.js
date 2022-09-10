@@ -160,12 +160,11 @@ const addToWatchlist = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const anime = req.body;
-  const { name, id } = req.body;
+  const { anime, id } = req.body;
 
-  const query = { _id: id }; // should be user id from the request
+  const query = { _id: id };
   const value = {
-    $addToSet: { "profile.watchlist": name },
+    $addToSet: { "profile.watchlist": anime },
   };
 
   try {
@@ -241,11 +240,10 @@ const addToHistory = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  // const anime = req.body;
-  const { name, id } = req.body;
-  const query = { _id: id }; // should be user id from the request
+  const { anime, id } = req.body;
+  const query = { _id: id };
   const value = {
-    $addToSet: { "profile.history": name },
+    $addToSet: { "profile.history": anime },
   };
 
   try {
