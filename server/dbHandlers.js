@@ -126,6 +126,44 @@ const getFavourites = async (req, res) => {
   client.close();
 };
 
+const updateUserLists = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+
+  const { anime, id, profileTypeId } = req.body;
+  console.log(`fav patch info`, id, profileTypeId);
+
+  try {
+    const query = { _id: id };
+
+    const list = `profile.${profileTypeId}`;
+    console.log(`the string list is`, list);
+
+    const removedAnime = {
+      $pull: { [list]: { mal_id: Number(anime.mal_id) } }, // should be anime id
+    };
+
+    const deletedAnime = await db
+      .collection("users")
+      .findOneAndUpdate(query, removedAnime);
+
+    deletedAnime.lastErrorObject.updatedExisting
+      ? res.status(201).json({
+          data: deletedAnime,
+          message: "Deleted Anime Found",
+        })
+      : res.status(404).json({
+          data: deletedAnime,
+          message: "Something Went Wrong",
+        });
+
+    client.close();
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
 const deleteFromFavourites = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
@@ -493,4 +531,5 @@ module.exports = {
   addComment,
   getComments,
   deleteComment,
+  updateUserLists,
 };

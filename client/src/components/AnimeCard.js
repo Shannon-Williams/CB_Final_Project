@@ -1,5 +1,6 @@
 import StyledAnimeCard, { Image } from "./styled/AnimeCard.styled";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import FavouriteButton from "./FavouriteButton";
 import HistoryButton from "./HistoryButton";
 import Watchlist from "./WatchlistButton";
@@ -9,6 +10,14 @@ import styled from "styled-components";
 
 const AnimeCard = ({ anime, profileTypeId }) => {
   const { user } = useAuth0();
+
+  console.log(useParams());
+
+  let profileId = useParams().profileTypeId;
+
+  profileTypeId = profileTypeId ? profileTypeId : profileId;
+
+  console.log(`animecare`, profileTypeId);
 
   const postToFavourties = async () => {
     console.log(`Anime is this`, anime);
@@ -22,7 +31,7 @@ const AnimeCard = ({ anime, profileTypeId }) => {
     });
   };
 
-  const deleteFromFavourties = async () => {
+  const updateUserLists = async () => {
     if (profileTypeId === "favourites") {
       const res = await fetch(`/api/favourite`, {
         method: "PATCH",
@@ -88,7 +97,7 @@ const AnimeCard = ({ anime, profileTypeId }) => {
           <FavouriteButton onClickFunc={postToFavourties} />
           <HistoryButton onClickFunc={postToHistory} />
           <Watchlist onClickFunc={postToWatchlist} />
-          <RemoveButton onClickFunc={deleteFromFavourties} />
+          <RemoveButton onClickFunc={updateUserLists} />
         </>
       )}
     </Wrapper>

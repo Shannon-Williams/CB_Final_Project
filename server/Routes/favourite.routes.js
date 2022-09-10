@@ -5,11 +5,11 @@ router.use(express.json());
 const {
   addToFavourites,
   getFavourites,
-  deleteFromFavourites,
+  updateUserLists,
 } = require("../dbHandlers");
 
 router.post("/", addToFavourites);
 router.get("/:id", getFavourites);
-router.patch("/", deleteFromFavourites);
+router.patch("/", updateUserLists);
 
 module.exports = router;

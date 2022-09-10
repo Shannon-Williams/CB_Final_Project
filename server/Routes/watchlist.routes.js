@@ -4,11 +4,11 @@ const router = express.Router();
 const {
   addToWatchlist,
   getWatchlist,
-  deleteFromWatchlist,
+  updateUserLists,
 } = require("../dbHandlers");
 
 router.post("/", addToWatchlist);
 router.get("/:id", getWatchlist);
-router.delete("/", deleteFromWatchlist);
+router.patch("/", updateUserLists);
 
 module.exports = router;
