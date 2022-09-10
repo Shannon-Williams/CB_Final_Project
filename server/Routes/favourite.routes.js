@@ -10,6 +10,6 @@ const {
 
 router.post("/", addToFavourites);
 router.get("/:id", getFavourites);
-router.delete("/", deleteFromFavourites);
+router.patch("/", deleteFromFavourites);
 
 module.exports = router;

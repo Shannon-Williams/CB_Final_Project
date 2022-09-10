@@ -4,7 +4,7 @@ import styled from "styled-components";
 const profileTabsData = [
   {
     title: "Favs",
-    path: "favs",
+    path: "favourites",
   },
   {
     title: "Watchlist",

@@ -130,10 +130,18 @@ const deleteFromFavourites = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
+
+  const { anime, id, profileTypeId } = req.body;
+  console.log(`fav patch info`, id, profileTypeId);
+
   try {
-    const query = { _id: "1234" }; // should be user id from the request
+    const query = { _id: id };
+
+    const list = `profile.${profileTypeId}`;
+    console.log(`the string list is`, list);
+
     const removedAnime = {
-      $pull: { "profile.favourites": { name: "mob" } }, // should be anime id
+      $pull: { [list]: { mal_id: Number(anime.mal_id) } }, // should be anime id
     };
 
     const deletedAnime = await db

@@ -54,7 +54,9 @@ const Profile = ({}) => {
       My Profile Page for {user?.given_name}
       <ProfileTabs />
       <ListContainer>
-        {profileTypeId === "favs" && <AnimeList animeList={favouriteList} />}
+        {profileTypeId === "favourites" && (
+          <AnimeList animeList={favouriteList} profileTypeId={profileTypeId} />
+        )}
         {profileTypeId === "history" && <AnimeList animeList={historyList} />}
         {profileTypeId === "watchlist" && <AnimeList animeList={watchlist} />}
       </ListContainer>
