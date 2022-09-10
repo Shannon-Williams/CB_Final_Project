@@ -1,12 +1,21 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
+import AnimeList from "../components/AnimeList";
+import ProfileTabs from "../components/ProfileTabs";
+import styled from "styled-components";
 
 const Profile = ({}) => {
   const { user, isLoading } = useAuth0();
   const [favouriteList, setFavouriteList] = useState([]);
   const [historyList, setHistoryList] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
+
+  let { profileTypeId } = useParams();
+
+  useEffect(() => {
+    console.log(`params are`, profileTypeId);
+  }, [profileTypeId]);
 
   const fetchFavourtieProfile = async () => {
     const res = await fetch(`/api/favourite/${user?.sub}`);
@@ -38,19 +47,32 @@ const Profile = ({}) => {
       fetchWatchlistProfile();
       fetchHistoryProfile();
     }
-  }, [user]);
+  }, [user, profileTypeId]);
 
   return (
-    <div>
+    <Wrapper>
       My Profile Page for {user?.given_name}
-      <div>
-        {favouriteList.map((anime) => {
-          return <span key={anime?.mal_id}>{anime?.title}</span>;
-        })}
-      </div>
+      <ProfileTabs />
+      <ListContainer>
+        {profileTypeId === "favs" && <AnimeList animeList={favouriteList} />}
+        {profileTypeId === "history" && <AnimeList animeList={historyList} />}
+        {profileTypeId === "watchlist" && <AnimeList animeList={watchlist} />}
+      </ListContainer>
       <Outlet />
-    </div>
+    </Wrapper>
   );
 };
 
 export default Profile;
+
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ListContainer = styled.div`
+  border: 1px solid black;
+`;
