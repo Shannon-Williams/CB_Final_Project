@@ -105,12 +105,12 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
         </StyledAnimeCard>
       </Link>
       {user && (
-        <>
+        <ButtonContainer>
           <FavouriteButton onClickFunc={postToFavourties} />
           <HistoryButton onClickFunc={postToHistory} />
           <Watchlist onClickFunc={postToWatchlist} />
           <RemoveButton onClickFunc={updateUserLists} />
-        </>
+        </ButtonContainer>
       )}
     </Wrapper>
   );
@@ -119,6 +119,7 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
 export default AnimeCard;
 
 const Wrapper = styled.div`
+  position: relative;
   & :hover {
     transition: all 0.4s;
     cursor: pointer;
@@ -144,4 +145,13 @@ const StyledAnimeCard = styled.li`
     /* transform: translateY(-0.8rem);
     box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3); */
   }
+`;
+
+const ButtonContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
