@@ -67,7 +67,11 @@ const Searchbar = ({}) => {
         </StyledButton>
       </SearchBarContainer>
       <AnimeListContainer>
-        <AnimeList key={"animelist"} animeList={searchResults} />
+        <AnimeList
+          key={"animelist"}
+          animeList={searchResults}
+          grayscale={true}
+        />
       </AnimeListContainer>
     </Wrapper>
   );
@@ -125,5 +129,5 @@ const StyledButton = styled(Button)`
 const AnimeListContainer = styled.div`
   width: 100%;
   height: 1px;
-  border: 1px green solid;
+  /* border: 1px green solid; */
 `;

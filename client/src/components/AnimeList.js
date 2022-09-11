@@ -1,7 +1,7 @@
 import AnimeCard from "./AnimeCard";
 import StyledAnimeList from "./styled/AnimeList.styled";
 
-const AnimeList = ({ animeList, profileTypeId }) => {
+const AnimeList = ({ animeList, profileTypeId, grayscale }) => {
   return (
     <StyledAnimeList>
       {animeList.map((anime) => {
@@ -10,6 +10,7 @@ const AnimeList = ({ animeList, profileTypeId }) => {
             key={anime.mal_id}
             anime={anime}
             profileTypeId={profileTypeId}
+            grayscale={grayscale}
           />
         );
       })}

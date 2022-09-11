@@ -1,4 +1,5 @@
-import StyledAnimeCard, { Image } from "./styled/AnimeCard.styled";
+import { Image } from "./styled/AnimeCard.styled";
+// import StyledAnimeCard, { Image } from "./styled/AnimeCard.styled";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import FavouriteButton from "./FavouriteButton";
@@ -7,9 +8,11 @@ import Watchlist from "./WatchlistButton";
 import RemoveButton from "./RemoveButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
+import { useState } from "react";
 
-const AnimeCard = ({ anime, profileTypeId }) => {
+const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
   const { user } = useAuth0();
+  const [filter, setFilter] = useState(grayscale);
 
   console.log(useParams());
 
@@ -88,7 +91,16 @@ const AnimeCard = ({ anime, profileTypeId }) => {
   return (
     <Wrapper>
       <Link style={{ textDecoration: "none" }} to={`/anime/${anime.mal_id}`}>
-        <StyledAnimeCard onClick={() => {}}>
+        <StyledAnimeCard
+          filter={filter}
+          onMouseEnter={() => {
+            console.log(filter);
+            setFilter(false);
+          }}
+          onMouseLeave={() => {
+            setFilter(true);
+          }}
+        >
           <Image src={`${anime?.images?.jpg?.large_image_url}`} />
         </StyledAnimeCard>
       </Link>
@@ -106,4 +118,30 @@ const AnimeCard = ({ anime, profileTypeId }) => {
 
 export default AnimeCard;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  & :hover {
+    transition: all 0.4s;
+    cursor: pointer;
+    transform: translateY(-0.8rem);
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3);
+  }
+`;
+
+const StyledAnimeCard = styled.li`
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  /* border: 1px solid green; */
+  width: 250px;
+  /* height: 215px; */
+
+  filter: grayscale(${(props) => (props.filter ? `${100}` : 0)});
+  /* filter: grayscale(100%); */
+  & :hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    /* transform: translateY(-0.8rem);
+    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3); */
+  }
+`;
