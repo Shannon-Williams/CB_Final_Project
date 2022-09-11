@@ -1,11 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-
-
-
-
-
+/*
+#FF69B4
+#010400
+#145C9E
+#3BF4FB
+#B10F2E
+*/
   /* http://meyerweb.com/eric/tools/css/reset/
       v2.0 | 20110126
       License: none (public domain)
@@ -15,6 +17,11 @@ export default createGlobalStyle`
   --test:#112960;
   --border: lightgray;
   --darker-border: darkgray;
+  --primary: #FF69B4;
+  --black:#010400;
+  --dark-blue:#145C9E;
+  --light-blue:#3BF4FB;
+  --red:#B10F2E
 }
 
   html, body, div, span, applet, object, iframe,

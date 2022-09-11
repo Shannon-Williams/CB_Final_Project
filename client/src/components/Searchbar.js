@@ -63,7 +63,7 @@ const Searchbar = ({}) => {
           }}
         />
         <StyledButton onClick={HandleSearch}>
-          <SearchIcon color={`var(--gray)`} size={20} />
+          <SearchIcon color={`var(--primary)`} size={30} />
         </StyledButton>
       </SearchBarContainer>
       <AnimeListContainer>
@@ -80,24 +80,29 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 5rem;
   /* margin: 2rem 0 0 0; */
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   height: 100%;
 `;
 
 // Maybe this should be a form so we can hit enter to submit search, or add an eventlistener for enter
 const SearchBarContainer = styled.div`
-  border: 1px var(--border) solid;
+  border: 3px var(--primary) solid;
   border-radius: 7px;
-  /* height: fit-content; */
   overflow: hidden;
   padding: 0.25rem 1rem;
   position: relative;
-  width: 300px;
+  width: 500px;
+  background-color: var(--black);
 `;
 
 const StyledInput = styled(Input)`
   border: none;
+  background: none;
+  color: var(--primary);
+  font-size: 1.25rem;
+  height: 2rem;
+
   &:focus {
     outline: none;
   }
