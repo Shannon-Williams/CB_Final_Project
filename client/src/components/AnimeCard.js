@@ -120,8 +120,9 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
           onMouseLeave={() => {
             setFilter(true);
           }}
+          filter={filter}
         >
-          <RemoveButton onClickFunc={updateUserLists} />
+          {profileTypeId && <RemoveButton onClickFunc={updateUserLists} />}
           <FavouriteButton onClickFunc={postToFavourties} />
           <HistoryButton onClickFunc={postToHistory} />
           <Watchlist onClickFunc={postToWatchlist} />
@@ -165,7 +166,7 @@ const StyledAnimeCard = styled.li`
 `;
 
 const ButtonContainer = styled.div`
-  /* display: ${(props) => (props.filter ? "flex" : "none")}; */
+  /* display: ${(props) => (props.filter ? "none" : "flex")}; */
   display: flex;
   flex-direction: column;
   position: absolute;
