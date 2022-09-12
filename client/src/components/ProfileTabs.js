@@ -26,10 +26,10 @@ const ProfileTabs = ({}) => {
               key={`${tabs.title}-${index}`}
               style={{ textDecoration: "none" }}
               to={`/profile/${tabs.path}`}
-              activeClassName={`${
-                tabs.title === "Tweets" ? "is-active " : null
-              }`}
-              exact={true}
+              // activeClassName={`${
+              //   tabs.title === "Tweets" ? "is-active " : null
+              // }`}
+              // exact={true}
               // reloadDocument
             >
               <ListItem>{tabs.title}</ListItem>

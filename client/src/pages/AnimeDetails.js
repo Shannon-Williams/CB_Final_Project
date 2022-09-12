@@ -10,7 +10,6 @@ import Lists from "../components/Lists";
 import FavouriteButton from "../components/FavouriteButton";
 import HistoryButton from "../components/HistoryButton";
 import Watchlist from "../components/WatchlistButton";
-import RemoveButton from "../components/RemoveButton";
 import homepageBg from "../assets/biganime.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
