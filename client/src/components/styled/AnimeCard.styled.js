@@ -18,6 +18,12 @@ import { css } from "styled-components";
 // `;
 
 export const Image = styled.img`
+  /* border-radius: 7px; */
+  border-right: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+  border-top: 2px solid var(--black);
+
+  padding: 1rem;
   /* height: 50%; */
   /* width: 50%; */
 `;

@@ -7,16 +7,18 @@ import styled from "styled-components";
 import { Image } from "../components/styled/AnimeCard.styled";
 import YoutubeEmbed from "../components/YoutubeEmbed";
 import Lists from "../components/Lists";
+import homepageBg from "../assets/biganime.png";
 const AnimeDetails = () => {
   const { id } = useParams();
   const [commentFeed, setCommentFeed] = useState();
   const [animeDetails, setAnimeDetails] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   console.log(`param is`, id);
 
   const fetchAnimeFullDetails = async () => {
-    setLoading(true);
+    // setLoading(true);
+
     const res = await fetch(`/api/anime/id/${id}`);
     const { data } = await res.json();
     console.log(`anime details data`, data);
@@ -40,34 +42,58 @@ const AnimeDetails = () => {
     console.log(animeDetails);
   }, [id]);
 
-  return (
+  return !loading ? (
     <Wrapper>
-      <AnimeTitle>{animeDetails?.title}</AnimeTitle>
-      <AnimeOverviewContainer>
-        <Image src={`${animeDetails?.images?.jpg?.large_image_url}`} />
-        <Overview>
-          <Details>
-            <span>Rating: {animeDetails?.rating}</span>
-            <span>Aired: {animeDetails?.aired.string}</span>
-            <span>Episodes: {animeDetails?.episodes}</span>
-            <span>
-              Genre(s): <Lists list={animeDetails?.genres} />
-            </span>
-            <span>
-              Streaming:
-              <Lists list={animeDetails?.streaming} />
-            </span>
-            <span>{}</span>
-          </Details>
-          <EmbeddedVideo embedUrl={animeDetails?.trailer.embed_url} />
-          <AnimeRating animeId={id} />
-          <CommentPost animeId={id} fetchCommentSection={fetchCommentSection} />
-        </Overview>
-      </AnimeOverviewContainer>
-      <P>{animeDetails?.synopsis}</P>
+      <DetailContainer>
+        <AnimeTitle>{animeDetails?.title}</AnimeTitle>
+        <AnimeOverviewContainer>
+          {animeDetails?.images && (
+            <Image src={`${animeDetails.images.jpg.large_image_url}`} />
+          )}
 
-      {commentFeed && <CommentSection comments={commentFeed} />}
+          <Overview>
+            <Details>
+              <span>
+                {" "}
+                <DetailTitle>Rating:</DetailTitle> {animeDetails?.rating}
+              </span>
+              <span>
+                <DetailTitle>Aired:</DetailTitle> {animeDetails?.aired.string}
+              </span>
+              <span>
+                <DetailTitle>Episodes:</DetailTitle>
+                {animeDetails?.episodes}
+              </span>
+              <span>
+                <DetailTitle>Genre(s):</DetailTitle>{" "}
+                <Lists list={animeDetails?.genres} />
+              </span>
+              <span>
+                <DetailTitle>Streaming:</DetailTitle>
+                <Lists list={animeDetails?.streaming} />
+              </span>
+              <span>{}</span>
+            </Details>
+            <EmbeddedVideo embedUrl={animeDetails?.trailer.embed_url} />
+            <AnimeRating animeId={id} />
+            <CommentPost
+              animeId={id}
+              fetchCommentSection={fetchCommentSection}
+            />
+          </Overview>
+        </AnimeOverviewContainer>
+        <Summary>
+          <Synpopsis>Synpopsis:</Synpopsis>
+          <P>{animeDetails?.synopsis}</P>
+        </Summary>
+        <AngledLine />
+        <AngledLine />
+
+        {commentFeed && <CommentSection comments={commentFeed} />}
+      </DetailContainer>
     </Wrapper>
+  ) : (
+    <div>Loading...</div>
   );
 };
 
@@ -75,22 +101,50 @@ export default AnimeDetails;
 
 const Wrapper = styled.div`
   border: 1px solid blue;
+  width: 100%;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
+    url(${homepageBg});
+  background-position: center;
+  /* background-repeat: no-repeat; */
+  background-repeat: repeat;
+  background-size: cover;
+  position: relative;
+`;
+
+const DetailContainer = styled.div`
   width: 1000px;
+  margin: 1rem auto;
+  /* padding: 1rem; */
+  background-color: var(--white);
+  border-radius: 10px;
+  border: 2px solid var(--black);
+`;
+
+const DetailTitle = styled.span`
+  font-weight: bold;
 `;
 
 const AnimeTitle = styled.h1`
-  margin: 1.5rem 0;
+  margin: 0 0 0.25rem 0;
+  /* padding: 1rem 0 0 0; */
   font-size: 2rem;
+  text-align: center;
+  border-bottom: 2px solid var(--black);
 `;
 
 const P = styled.p``;
 
 const AnimeOverviewContainer = styled.div`
   display: flex;
+  gap: 0.25rem;
 `;
 const Overview = styled.div`
   display: flex;
   flex-direction: column;
+  border-left: 2px solid var(--black);
+  border-bottom: 2px solid var(--black);
+  border-top: 2px solid var(--black);
+  padding: 1rem;
 `;
 
 const EmbeddedVideo = styled(YoutubeEmbed)`
@@ -100,4 +154,20 @@ const EmbeddedVideo = styled(YoutubeEmbed)`
 const Details = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
+`;
+
+const Synpopsis = styled.h3`
+  /* margin: 0.5rem 0; */
+`;
+const Summary = styled.div`
+  padding: 1rem;
+`;
+
+const AngledLine = styled.div`
+  /* height: 50px; */
+  width: 100%;
+  transform: skew(0deg, 1deg);
+  border-bottom: 2px solid var(--black);
+  margin: 0 0 0.25rem 0;
 `;

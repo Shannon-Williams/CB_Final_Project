@@ -1,6 +1,6 @@
 import Searchbar from "../components/Searchbar";
 import styled from "styled-components";
-import bg from "../assets/biganime.png";
+import homepageBg from "../assets/biganime.png";
 
 const Homepage = ({}) => {
   return (
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   border: 1px blue solid;
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
-    url(${bg});
+    url(${homepageBg});
   background-position: center;
   /* background-repeat: no-repeat; */
   background-repeat: repeat;

@@ -21,7 +21,8 @@ export default createGlobalStyle`
   --black:#010400;
   --dark-blue:#145C9E;
   --light-blue:#3BF4FB;
-  --red:#B10F2E
+  --red:#B10F2E;
+  --white: whitesmoke;
 }
 
   html, body, div, span, applet, object, iframe,

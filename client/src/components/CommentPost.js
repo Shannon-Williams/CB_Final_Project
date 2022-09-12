@@ -63,6 +63,7 @@ const CommentInput = styled.textarea`
   padding: 0.5rem 0 0 1rem;
   resize: none;
   border: none;
+  background-color: var(--white);
 
   &:focus {
     outline: none;
