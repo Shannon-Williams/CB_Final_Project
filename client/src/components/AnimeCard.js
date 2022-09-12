@@ -165,6 +165,7 @@ const StyledAnimeCard = styled.li`
 `;
 
 const ButtonContainer = styled.div`
+  /* display: ${(props) => (props.filter ? "flex" : "none")}; */
   display: flex;
   flex-direction: column;
   position: absolute;
