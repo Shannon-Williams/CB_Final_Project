@@ -20,13 +20,13 @@ const Wrapper = styled.div`
 `;
 
 const HeaderContainer = styled.div`
-  border: 1px pink solid;
+  /* border: 1px pink solid; */
   /* height: 5vh; */
 `;
 
 const MainContent = styled.div`
-  border: 1px blue solid;
-  height: 95vh;
+  /* border: 1px blue solid; */
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
 `;

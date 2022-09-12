@@ -10,7 +10,7 @@ const Header = ({}) => {
   return (
     <Wrapper>
       <Link style={{ textDecoration: "none" }} to={`/`}>
-        <Logo>Header</Logo>
+        <Logo>Final Project</Logo>
       </Link>
       <ProfileContainer>
         {user && (
@@ -32,10 +32,11 @@ const Header = ({}) => {
 export default Header;
 
 const Wrapper = styled.div`
-  border: 1px black solid;
+  /* border: 1px black solid; */
   height: 100%;
   display: flex;
   justify-content: space-between;
+  padding: 0.75rem;
 `;
 
 const Logo = styled.div``;

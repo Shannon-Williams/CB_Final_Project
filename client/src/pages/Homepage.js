@@ -20,7 +20,7 @@ const Homepage = ({}) => {
 export default Homepage;
 
 const Wrapper = styled.div`
-  border: 1px blue solid;
+  /* border: 1px blue solid; */
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
     url(${homepageBg});
@@ -29,6 +29,7 @@ const Wrapper = styled.div`
   background-repeat: repeat;
   background-size: cover;
   position: relative;
+  height: 100vh;
   /* filter: grayscale(100%); */
   /* animation: change 10s infinite ease-in-out; */
   /* background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)); */

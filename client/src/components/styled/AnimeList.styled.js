@@ -5,6 +5,7 @@ const StyledAnimeList = styled.ul`
   /* grid-template-columns: repeat(5, 250px); */
   /* grid-template-columns: repeat(5, 250px); */
   gap: 1rem;
+  flex-wrap: wrap;
   justify-content: center;
 `;
 export default StyledAnimeList;

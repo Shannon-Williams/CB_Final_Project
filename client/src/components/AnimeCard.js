@@ -103,7 +103,7 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
             }}
             hover={true}
           >
-            <Image src={`${anime?.images?.jpg?.large_image_url}`} />
+            <Images src={`${anime?.images?.jpg?.large_image_url}`} />
           </StyledAnimeCard>
         </Link>
       </Wrapper>
@@ -217,3 +217,5 @@ const StyledHistoryButtonContainer = styled.div`
     bottom: -19px;
   }
 `;
+
+const Images = styled.img``;

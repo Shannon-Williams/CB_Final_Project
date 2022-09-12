@@ -1,9 +1,10 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import AnimeList from "../components/AnimeList";
 import ProfileTabs from "../components/ProfileTabs";
 import styled from "styled-components";
+import homepageBg from "../assets/biganime.png";
 
 const Profile = ({}) => {
   const { user, isLoading } = useAuth0();
@@ -51,16 +52,24 @@ const Profile = ({}) => {
 
   return (
     <Wrapper>
-      My Profile Page for {user?.given_name}
+      {/* My Profile Page for {user?.given_name} */}
       <ProfileTabs />
       <ListContainer>
         {profileTypeId === "favourites" && (
-          <AnimeList animeList={favouriteList} profileTypeId={profileTypeId} />
+          <AnimeList
+            animeList={favouriteList}
+            profileTypeId={profileTypeId}
+            grayscale={true}
+          />
         )}
-        {profileTypeId === "history" && <AnimeList animeList={historyList} />}
-        {profileTypeId === "watchlist" && <AnimeList animeList={watchlist} />}
+        {profileTypeId === "history" && (
+          <AnimeList animeList={historyList} grayscale={true} />
+        )}
+        {profileTypeId === "watchlist" && (
+          <AnimeList animeList={watchlist} grayscale={true} />
+        )}
       </ListContainer>
-      <Outlet />
+      {/* <Outlet /> */}
     </Wrapper>
   );
 };
@@ -73,8 +82,16 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
+    url(${homepageBg});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-repeat: repeat;
+  background-size: cover;
+  position: relative;
+  height: 100vh; */
 `;
 
 const ListContainer = styled.div`
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;

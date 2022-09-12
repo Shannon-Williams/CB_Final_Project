@@ -86,7 +86,7 @@ const Wrapper = styled.div`
   /* margin: 2rem 0 0 0; */
   /* justify-content: center; */
   align-items: center;
-  height: 100%;
+  /* height: 95vh; */
 `;
 
 // Maybe this should be a form so we can hit enter to submit search, or add an eventlistener for enter
