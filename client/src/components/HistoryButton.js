@@ -1,5 +1,5 @@
 const HistoryButton = ({ onClickFunc }) => {
-  return <button onClick={onClickFunc}>Add to History</button>;
+  return <button onClick={onClickFunc}>H</button>;
 };
 
 export default HistoryButton;

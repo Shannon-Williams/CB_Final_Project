@@ -1,5 +1,5 @@
 const FavouriteButton = ({ onClickFunc }) => {
-  return <button onClick={onClickFunc}>Add to Favs</button>;
+  return <button onClick={onClickFunc}>F</button>;
 };
 
 export default FavouriteButton;

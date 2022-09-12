@@ -89,37 +89,41 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
   };
 
   return (
-    <Wrapper>
-      <Link style={{ textDecoration: "none" }} to={`/anime/${anime.mal_id}`}>
-        <StyledAnimeCard
-          filter={filter}
-          onMouseEnter={() => {
-            console.log(filter);
-            setFilter(false);
-          }}
-          onMouseLeave={() => {
-            setFilter(true);
-          }}
-        >
-          <Image src={`${anime?.images?.jpg?.large_image_url}`} />
-        </StyledAnimeCard>
-      </Link>
+    <Container>
+      <Wrapper>
+        <Link style={{ textDecoration: "none" }} to={`/anime/${anime.mal_id}`}>
+          <StyledAnimeCard
+            filter={filter}
+            onMouseEnter={() => {
+              console.log(filter);
+              setFilter(false);
+            }}
+            onMouseLeave={() => {
+              setFilter(true);
+            }}
+            hover={true}
+          >
+            <Image src={`${anime?.images?.jpg?.large_image_url}`} />
+          </StyledAnimeCard>
+        </Link>
+      </Wrapper>
       {user && (
         <ButtonContainer>
+          <RemoveButton onClickFunc={updateUserLists} />
           <FavouriteButton onClickFunc={postToFavourties} />
           <HistoryButton onClickFunc={postToHistory} />
+
           <Watchlist onClickFunc={postToWatchlist} />
-          <RemoveButton onClickFunc={updateUserLists} />
         </ButtonContainer>
       )}
-    </Wrapper>
+    </Container>
   );
 };
 
 export default AnimeCard;
 
 const Wrapper = styled.div`
-  position: relative;
+  /* position: relative; */
   & :hover {
     transition: all 0.4s;
     cursor: pointer;
@@ -148,10 +152,69 @@ const StyledAnimeCard = styled.li`
 `;
 
 const ButtonContainer = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 0;
   right: 0;
+  color: var(--primary);
+  gap: 0.5rem;
+`;
+
+const Container = styled.div`
+  position: relative;
+`;
+
+const StyledFavouriteButton = styled.div`
+  width: 300px;
+  /* margin: 50px auto; */
+  background: #00bfb6;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  font-family: arial;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid #00bfb6;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #00bfb6;
+    border-bottom: 10px solid transparent;
+    left: 19px;
+    bottom: -19px;
+  }
+`;
+
+const StyledHistoryButtonContainer = styled.div`
+  /* width: 300px; */
+  /* margin: 50px auto; */
+  background: #00bfb6;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  font-family: arial;
+  position: relative;
+  z-index: 1;
+  left: 0px;
+  bottom: -100px;
+
+  &::before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid #00bfb6;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #00bfb6;
+    border-bottom: 10px solid transparent;
+    left: 19px;
+    bottom: -19px;
+  }
 `;

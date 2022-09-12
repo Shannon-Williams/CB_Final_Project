@@ -1,5 +1,5 @@
 const Watchlist = ({ onClickFunc }) => {
-  return <button onClick={onClickFunc}>Add to Watchlist</button>;
+  return <button onClick={onClickFunc}>W</button>;
 };
 
 export default Watchlist;
