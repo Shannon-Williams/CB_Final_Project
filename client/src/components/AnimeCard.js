@@ -112,7 +112,6 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
           <RemoveButton onClickFunc={updateUserLists} />
           <FavouriteButton onClickFunc={postToFavourties} />
           <HistoryButton onClickFunc={postToHistory} />
-
           <Watchlist onClickFunc={postToWatchlist} />
         </ButtonContainer>
       )}

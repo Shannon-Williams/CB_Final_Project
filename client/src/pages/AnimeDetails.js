@@ -7,12 +7,55 @@ import styled from "styled-components";
 import { Image } from "../components/styled/AnimeCard.styled";
 import YoutubeEmbed from "../components/YoutubeEmbed";
 import Lists from "../components/Lists";
+import FavouriteButton from "../components/FavouriteButton";
+import HistoryButton from "../components/HistoryButton";
+import Watchlist from "../components/WatchlistButton";
+import RemoveButton from "../components/RemoveButton";
 import homepageBg from "../assets/biganime.png";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const AnimeDetails = () => {
   const { id } = useParams();
   const [commentFeed, setCommentFeed] = useState();
   const [animeDetails, setAnimeDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  let { user } = useAuth0();
+
+  const postToFavourties = async () => {
+    console.log(`Anime is this`, animeDetails);
+    const res = await fetch(`/api/favourite`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json ",
+      },
+      body: JSON.stringify({ id: user.sub, anime: animeDetails }),
+    });
+  };
+
+  const postToHistory = async () => {
+    console.log(`Anime is this`, animeDetails);
+    const res = await fetch(`/api/history`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: user.sub, anime: animeDetails }),
+    });
+  };
+
+  const postToWatchlist = async () => {
+    console.log(`Anime is this`, animeDetails);
+    const res = await fetch(`/api/watchlist`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: user.sub, anime: animeDetails }),
+    });
+  };
 
   console.log(`param is`, id);
 
@@ -46,6 +89,7 @@ const AnimeDetails = () => {
     <Wrapper>
       <DetailContainer>
         <AnimeTitle>{animeDetails?.title}</AnimeTitle>
+
         <AnimeOverviewContainer>
           {animeDetails?.images && (
             <Image src={`${animeDetails.images.jpg.large_image_url}`} />
@@ -88,6 +132,13 @@ const AnimeDetails = () => {
         </Summary>
         <AngledLine />
         <AngledLine />
+        {user && (
+          <ButtonContainer>
+            <FavouriteButton onClickFunc={postToFavourties} />
+            <HistoryButton onClickFunc={postToHistory} />
+            <Watchlist onClickFunc={postToWatchlist} />
+          </ButtonContainer>
+        )}
 
         {commentFeed && <CommentSection comments={commentFeed} />}
       </DetailContainer>
@@ -102,13 +153,13 @@ export default AnimeDetails;
 const Wrapper = styled.div`
   border: 1px solid blue;
   width: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
     url(${homepageBg});
   background-position: center;
   /* background-repeat: no-repeat; */
   background-repeat: repeat;
   background-size: cover;
-  position: relative;
+  /* position: relative; */
 `;
 
 const DetailContainer = styled.div`
@@ -118,6 +169,7 @@ const DetailContainer = styled.div`
   background-color: var(--white);
   border-radius: 10px;
   border: 2px solid var(--black);
+  position: relative;
 `;
 
 const DetailTitle = styled.span`
@@ -126,7 +178,7 @@ const DetailTitle = styled.span`
 
 const AnimeTitle = styled.h1`
   margin: 0 0 0.25rem 0;
-  /* padding: 1rem 0 0 0; */
+  padding: 0.5rem 0 0 0;
   font-size: 2rem;
   text-align: center;
   border-bottom: 2px solid var(--black);
@@ -136,7 +188,9 @@ const P = styled.p``;
 
 const AnimeOverviewContainer = styled.div`
   display: flex;
-  gap: 0.25rem;
+  /* gap: 0.25rem; */
+  justify-content: space-between;
+  /* padding: 0 0.25rem; */
 `;
 const Overview = styled.div`
   display: flex;
@@ -162,6 +216,7 @@ const Synpopsis = styled.h3`
 `;
 const Summary = styled.div`
   padding: 1rem;
+  /* padding: 0 0 1rem 0; */
 `;
 
 const AngledLine = styled.div`
@@ -170,4 +225,14 @@ const AngledLine = styled.div`
   transform: skew(0deg, 1deg);
   border-bottom: 2px solid var(--black);
   margin: 0 0 0.25rem 0;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: -20px;
+  color: var(--primary);
+  gap: 0.5rem;
 `;

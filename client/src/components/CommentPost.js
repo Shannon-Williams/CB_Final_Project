@@ -77,6 +77,12 @@ const CommentButton = styled(Button)`
   padding: 0.25rem 0.5rem;
   margin: 0.25rem;
   border-radius: 10px;
+
+  &:hover {
+    background-color: var(--black);
+    color: white;
+    font-weight: bold;
+  }
 `;
 
 const CommentContainer = styled.div`
