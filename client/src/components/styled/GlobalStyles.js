@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import homepageBg from "../../assets/biganime.png";
 
 export default createGlobalStyle`
 /*
@@ -24,6 +25,9 @@ export default createGlobalStyle`
   --red:#B10F2E;
   --white: whitesmoke;
 }
+
+
+
 
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -53,6 +57,15 @@ export default createGlobalStyle`
   }
   body {
       line-height: 1;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)),
+    url(${homepageBg});
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-repeat: repeat; */
+  background-size: cover;
+  position: relative;
+  /* z-index:-1000; */
+  height:100vh;
   }
   ol, ul {
       list-style: none;

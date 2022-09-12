@@ -1,7 +1,7 @@
 import { Image } from "./styled/AnimeCard.styled";
 // import StyledAnimeCard, { Image } from "./styled/AnimeCard.styled";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import FavouriteButton from "./FavouriteButton";
 import HistoryButton from "./HistoryButton";
 import Watchlist from "./WatchlistButton";
@@ -13,11 +13,14 @@ import { useState } from "react";
 const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
   const { user } = useAuth0();
   const [filter, setFilter] = useState(grayscale);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
+  const refreshPage = () => {
+    navigate(0);
+  };
   console.log(useParams());
-
   let profileId = useParams().profileTypeId;
-
   profileTypeId = profileTypeId ? profileTypeId : profileId;
 
   console.log(`animecare`, profileTypeId);
@@ -62,6 +65,7 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
         }),
       });
     }
+    refreshPage();
   };
 
   const postToHistory = async () => {
@@ -88,7 +92,7 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
     });
   };
 
-  return (
+  return !loading ? (
     <Container>
       <Wrapper>
         <Link style={{ textDecoration: "none" }} to={`/anime/${anime.mal_id}`}>
@@ -108,7 +112,15 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
         </Link>
       </Wrapper>
       {user && (
-        <ButtonContainer>
+        <ButtonContainer
+          onMouseEnter={() => {
+            console.log(filter);
+            setFilter(false);
+          }}
+          onMouseLeave={() => {
+            setFilter(true);
+          }}
+        >
           <RemoveButton onClickFunc={updateUserLists} />
           <FavouriteButton onClickFunc={postToFavourties} />
           <HistoryButton onClickFunc={postToHistory} />
@@ -116,6 +128,8 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
         </ButtonContainer>
       )}
     </Container>
+  ) : (
+    <div>Loading...</div>
   );
 };
 

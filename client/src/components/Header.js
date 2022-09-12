@@ -14,11 +14,11 @@ const Header = ({}) => {
       </Link>
       <ProfileContainer>
         {user && (
-          <div>
-            <Link style={{ textDecoration: "none" }} to={`/profile`}>
+          <ProfileLink>
+            <StyledLink style={{ textDecoration: "none" }} to={`/profile`}>
               Profile
-            </Link>
-          </div>
+            </StyledLink>
+          </ProfileLink>
         )}
         <ProfileButtonsContainer>
           <LoginButton />
@@ -37,9 +37,28 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 0.75rem;
+  color: var(--white);
 `;
 
-const Logo = styled.div``;
+const Logo = styled.div`
+  color: white;
+`;
+
+const StyledLink = styled(Link)`
+  a {
+    color: white;
+  }
+
+  a:visited {
+    color: white;
+  }
+`;
+
+const ProfileLink = styled.div`
+  & > a {
+    color: white;
+  }
+`;
 
 const ProfileContainer = styled.div`
   display: flex;

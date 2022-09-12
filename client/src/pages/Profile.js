@@ -11,6 +11,7 @@ const Profile = ({}) => {
   const [favouriteList, setFavouriteList] = useState([]);
   const [historyList, setHistoryList] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   let { profileTypeId } = useParams();
 
@@ -44,13 +45,15 @@ const Profile = ({}) => {
 
   useEffect(() => {
     if (user) {
+      setLoading(true);
       fetchFavourtieProfile();
       fetchWatchlistProfile();
       fetchHistoryProfile();
+      setLoading(false);
     }
   }, [user, profileTypeId]);
 
-  return (
+  return !loading ? (
     <Wrapper>
       {/* My Profile Page for {user?.given_name} */}
       <ProfileTabs />
@@ -71,6 +74,8 @@ const Profile = ({}) => {
       </ListContainer>
       {/* <Outlet /> */}
     </Wrapper>
+  ) : (
+    <div>Loading...</div>
   );
 };
 
@@ -82,14 +87,14 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)),
     url(${homepageBg});
   background-position: center;
   background-repeat: no-repeat;
   background-repeat: repeat;
   background-size: cover;
-  position: relative;
-  height: 100vh; */
+  position: relative; */
+  /* height: 100%; */
 `;
 
 const ListContainer = styled.div`
