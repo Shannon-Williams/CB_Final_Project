@@ -12,10 +12,10 @@ function App() {
   const [message, setMessage] = useState("No message");
   const { user, getAccessTokenSilently } = useAuth0();
 
-  useEffect(() => {
-    console.log(user);
-    getAccessTokenSilently().then((data) => console.log(data));
-  }, [user]);
+  // useEffect(() => {
+  //   console.log(user);
+  //   getAccessTokenSilently().then((data) => console.log(data));
+  // }, [user]);
 
   // useEffect(() => {
   //   fetch("/api/test")

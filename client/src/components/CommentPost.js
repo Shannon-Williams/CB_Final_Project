@@ -21,6 +21,8 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
       },
       body: JSON.stringify({
         user_id: user.sub,
+        nickname: user.nickname,
+        picture: user.picture,
         anime_id: animeId,
         comment: comment,
       }),
@@ -49,7 +51,9 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
           }}
           value={comment}
         ></CommentInput>
-        <CommentButton type="Submit">Submit</CommentButton>
+        <CommentButton type="Submit" disabled={user}>
+          Submit
+        </CommentButton>
       </CommentContainer>
     </form>
   );

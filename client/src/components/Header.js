@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Header = ({}) => {
   const { user } = useAuth0();
-  console.log(`header user `, user);
+  // console.log(`header user `, user);
   return (
     <Wrapper>
       <Link style={{ textDecoration: "none" }} to={`/`}>
@@ -15,7 +15,10 @@ const Header = ({}) => {
       <ProfileContainer>
         {user && (
           <ProfileLink>
-            <StyledLink style={{ textDecoration: "none" }} to={`/profile`}>
+            <StyledLink
+              style={{ textDecoration: "none" }}
+              to={`/profile/favourites`}
+            >
               Profile
             </StyledLink>
           </ProfileLink>

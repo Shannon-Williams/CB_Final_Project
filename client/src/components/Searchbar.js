@@ -5,38 +5,48 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import AnimeList from "./AnimeList";
 import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
+import useDebounce from "../hooks/useDebounce";
 
 const Searchbar = ({}) => {
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
   const [genreSelection, setGenreSelection] = useState("All");
   const [genres, setGenres] = useState([]);
-  const [searchResults, setSearchResults] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchResults, setSearchResults] = useState([]);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const q = searchParams.get("q");
   const genre = searchParams.get("genre");
 
+  const debouncedSearch = useDebounce(search, 500);
+
   const fetchAnimeSearchResults = async () => {
     setLoading(true);
-    const res = await fetch(`/api/anime/search/?q=${search}`);
+    const res = await fetch(`/api/anime/search/?q=${debouncedSearch}`);
     const { data } = await res.json();
     setSearchResults(data);
+    console.log(`the search is`, data);
     setLoading(false);
     return data;
   };
 
-  const fetchGenres = async () => {
-    const res = await fetch(`/api/anime/genres`);
-    const { data } = await res.json();
-    setGenres(data);
-    console.log(data);
-    return data;
-  };
-
   useEffect(() => {
-    fetchGenres();
-  }, []);
+    //Search api
+    if (debouncedSearch) fetchAnimeSearchResults();
+  }, [debouncedSearch]);
+
+  // const fetchGenres = async () => {
+  //   const res = await fetch(`/api/anime/genres`);
+  //   const { data } = await res.json();
+  //   setGenres(data);
+  //   console.log(data);
+  //   return data;
+  // };
+
+  // useEffect(() => {
+  //   fetchGenres();
+  // }, []);
 
   useEffect(() => {
     const sortedGenres = genres
@@ -57,7 +67,7 @@ const Searchbar = ({}) => {
       <SearchBarContainer>
         <StyledInput
           type={"text"}
-          placeholder={"Search for animes..."}
+          placeholder={"Search for anime..."}
           onChange={(e) => {
             setSearch(e.target.value);
           }}
@@ -67,11 +77,7 @@ const Searchbar = ({}) => {
         </StyledButton>
       </SearchBarContainer>
       <AnimeListContainer>
-        <AnimeList
-          key={"animelist"}
-          animeList={searchResults}
-          grayscale={true}
-        />
+        <AnimeList animeList={searchResults} grayscale={true} />
       </AnimeListContainer>
     </Wrapper>
   );
@@ -128,6 +134,6 @@ const StyledButton = styled(Button)`
 
 const AnimeListContainer = styled.div`
   width: 100%;
-  height: 1px;
+  /* height: 1px; */
   /* border: 1px green solid; */
 `;

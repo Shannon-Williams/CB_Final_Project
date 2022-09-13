@@ -52,13 +52,15 @@ const AnimeRating = ({ animeId }) => {
             key={index}
             onClick={() => {
               setRating(ratingValue);
-              postAnimeRating(rating);
+              if (user) postAnimeRating(rating);
             }}
           >
             <StarInput type={"radio"} name={"rating"} value={ratingValue} />
             <FaStar
               size={100}
-              color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+              color={
+                ratingValue <= (hover || rating) ? "var(--primary)" : "#e4e5e9"
+              }
               onMouseEnter={() => {
                 setHover(ratingValue);
               }}

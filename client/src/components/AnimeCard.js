@@ -23,7 +23,7 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
   let profileId = useParams().profileTypeId;
   profileTypeId = profileTypeId ? profileTypeId : profileId;
 
-  console.log(`animecare`, profileTypeId);
+  // console.log(`animecare`, profileTypeId);
 
   const postToFavourties = async () => {
     console.log(`Anime is this`, anime);

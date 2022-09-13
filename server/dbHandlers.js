@@ -450,13 +450,15 @@ const addComment = async (req, res) => {
   await client.connect();
   const db = client.db("finalProject");
 
-  const { anime_id, user_id, comment } = req.body;
+  const { anime_id, user_id, comment, nickname, picture } = req.body;
 
   const value = {
     _id: uuidv4(),
     user_id: user_id,
     anime_id: Number(anime_id),
     comment: comment,
+    nickname: nickname,
+    picture: picture,
   };
 
   try {

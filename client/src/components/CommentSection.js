@@ -5,6 +5,9 @@ import styled from "styled-components";
 const CommentSection = ({ comments }) => {
   const [open, setOpen] = useState(false);
   let { user } = useAuth0();
+  console.log(`Comment Sections,`, comments);
+
+  console.log(`comment section`, user);
 
   return (
     <div>
@@ -18,10 +21,10 @@ const CommentSection = ({ comments }) => {
       {open &&
         comments.map((comment, index) => {
           return (
-            <UserCommentContainer>
-              <ImagePlaceHolder></ImagePlaceHolder>
+            <UserCommentContainer key={comment._id}>
+              <ImagePlaceHolder src={comment?.picture} />
               <UserComment>
-                <Username>{user?.given_name}</Username>
+                <Username>{comment?.nickname}</Username>
                 <CommentText key={index}>{comment?.comment}</CommentText>
               </UserComment>
             </UserCommentContainer>
@@ -47,11 +50,11 @@ const CommentTitle = styled.h2`
   }
 `;
 
-const ImagePlaceHolder = styled.div`
+const ImagePlaceHolder = styled.img`
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  background-color: gray;
+  /* background-color: gray; */
 `;
 
 const UserCommentContainer = styled.div`
