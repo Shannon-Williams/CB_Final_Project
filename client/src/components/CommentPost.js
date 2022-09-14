@@ -42,7 +42,7 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
         handleSubmit(e);
       }}
     >
-      <h3>Write Comment Here</h3>
+      {/* <h3>Write Rev Here</h3> */}
       <CommentContainer>
         <CommentInput
           placeholder="What did you think?"
@@ -64,7 +64,7 @@ export default CommentPost;
 const CommentInput = styled.textarea`
   height: 75px;
   width: 80%;
-  padding: 0.5rem 0 0 1rem;
+  padding: 0.25rem 0 0 1rem;
   resize: none;
   border: none;
   background-color: var(--white);
@@ -91,5 +91,6 @@ const CommentButton = styled(Button)`
 
 const CommentContainer = styled.div`
   position: relative;
-  border: 1px solid gray;
+  border: 1px solid var(--black);
+  border-radius: 7px;
 `;

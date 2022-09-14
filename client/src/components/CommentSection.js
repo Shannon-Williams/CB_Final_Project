@@ -38,6 +38,7 @@ export default CommentSection;
 
 const CommentText = styled.div`
   font-size: 1.25rem;
+  word-wrap: break-word;
 `;
 
 const CommentTitle = styled.h2`

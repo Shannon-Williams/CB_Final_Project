@@ -117,8 +117,10 @@ const AnimeDetails = () => {
               </span>
               <span>{}</span>
             </Details>
-            <EmbeddedVideo embedUrl={animeDetails?.trailer.embed_url} />
-            <AnimeRating animeId={id} />
+            {animeDetails?.trailer.embed_url && (
+              <EmbeddedVideo embedUrl={animeDetails?.trailer.embed_url} />
+            )}
+            {user && <AnimeRating animeId={id} />}
             <CommentPost
               animeId={id}
               fetchCommentSection={fetchCommentSection}
@@ -183,7 +185,11 @@ const AnimeTitle = styled.h1`
   border-bottom: 2px solid var(--black);
 `;
 
-const P = styled.p``;
+const P = styled.p`
+  word-wrap: break-word;
+  font-size: 0.9rem;
+  line-height: 1.2;
+`;
 
 const AnimeOverviewContainer = styled.div`
   display: flex;
@@ -207,11 +213,13 @@ const EmbeddedVideo = styled(YoutubeEmbed)`
 const Details = styled.div`
   display: flex;
   flex-direction: column;
+  width: 490px;
   gap: 0.25rem;
 `;
 
 const Synpopsis = styled.h3`
   /* margin: 0.5rem 0; */
+  margin: 0 0 0.25rem 0;
 `;
 const Summary = styled.div`
   padding: 1rem;

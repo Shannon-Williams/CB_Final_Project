@@ -19,6 +19,7 @@ import { css } from "styled-components";
 
 export const Image = styled.img`
   /* border-radius: 7px; */
+  width: 460px;
   border-right: 2px solid var(--black);
   border-bottom: 2px solid var(--black);
   border-top: 2px solid var(--black);

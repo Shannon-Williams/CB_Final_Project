@@ -2,7 +2,7 @@ const YoutubeEmbed = ({ embedUrl }) => {
   console.log(`embedded`, embedUrl);
   return (
     <iframe
-      width="500"
+      width="490"
       height="300"
       src={embedUrl}
       frameBorder="0"

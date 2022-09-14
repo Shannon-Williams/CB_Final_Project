@@ -13,6 +13,6 @@ const LoginButton = () => {
 export default LoginButton;
 
 const Button = styled.button`
-  color: var(--test);
+  color: var(--white);
   font-weight: bold;
 `;
