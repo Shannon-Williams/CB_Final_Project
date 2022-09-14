@@ -13,6 +13,22 @@ const Profile = ({}) => {
   const [watchlist, setWatchlist] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const [base64, setBase64] = useState("");
+
+  const handleOnChange = (e) => {
+    const files = e.target.files;
+    const file = files[0];
+    getBase64(file);
+  };
+
+  const getBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setBase64(reader.result);
+    };
+  };
+
   let { profileTypeId } = useParams();
 
   useEffect(() => {
@@ -56,6 +72,11 @@ const Profile = ({}) => {
   return !loading ? (
     <Wrapper>
       {/* My Profile Page for {user?.given_name} */}
+      <img src={base64} />
+      <form>
+        <input type={"file"} onChange={handleOnChange} />
+        {console.log(`this should be base64`, base64)}
+      </form>
       <ProfileTabs />
       <ListContainer>
         {profileTypeId === "favourites" && (

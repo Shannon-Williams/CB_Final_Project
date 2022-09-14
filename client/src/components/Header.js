@@ -15,10 +15,7 @@ const Header = ({}) => {
       <ProfileContainer>
         {user && (
           <ProfileLink>
-            <StyledLink
-              style={{ textDecoration: "none" }}
-              to={`/profile/favourites`}
-            >
+            <StyledLink style={{ textDecoration: "none" }} to={`/profile`}>
               Profile
             </StyledLink>
           </ProfileLink>
