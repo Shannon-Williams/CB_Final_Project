@@ -12,6 +12,7 @@ import HistoryButton from "../components/HistoryButton";
 import Watchlist from "../components/WatchlistButton";
 import homepageBg from "../assets/biganime.png";
 import { useAuth0 } from "@auth0/auth0-react";
+import Tippy from "@tippyjs/react";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -136,12 +137,18 @@ const AnimeDetails = () => {
         {user && (
           <ButtonContainer>
             <FavouriteButton onClickFunc={postToFavourties} />
+
             <HistoryButton onClickFunc={postToHistory} />
             <Watchlist onClickFunc={postToWatchlist} />
           </ButtonContainer>
         )}
 
-        {commentFeed && <CommentSection comments={commentFeed} />}
+        {commentFeed && (
+          <CommentSection
+            comments={commentFeed}
+            fetchCommentSection={fetchCommentSection}
+          />
+        )}
       </DetailContainer>
     </Wrapper>
   ) : (

@@ -1,8 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import styled from "styled-components";
+import { GoTriangleRight, GoTriangleDown } from "react-icons/go";
 
-const CommentSection = ({ comments }) => {
+const CommentSection = ({ comments, fetchCommentSection }) => {
   const [open, setOpen] = useState(false);
   let { user } = useAuth0();
   console.log(`Comment Sections,`, comments);
@@ -10,13 +11,17 @@ const CommentSection = ({ comments }) => {
   console.log(`comment section`, user);
 
   return (
-    <div>
+    <Wrapper>
       <CommentTitle
         onClick={() => {
           setOpen(!open);
+          // fetchCommentSection();
         }}
       >
-        Reviews
+        <ReviewTitle>
+          {" "}
+          {open ? <GoTriangleDown /> : <GoTriangleRight />}Reviews
+        </ReviewTitle>
       </CommentTitle>
       {open &&
         comments.map((comment, index) => {
@@ -30,11 +35,15 @@ const CommentSection = ({ comments }) => {
             </UserCommentContainer>
           );
         })}
-    </div>
+    </Wrapper>
   );
 };
 
 export default CommentSection;
+
+const Wrapper = styled.div`
+  width: 100%;
+`;
 
 const CommentText = styled.div`
   font-size: 1.25rem;
@@ -61,9 +70,22 @@ const ImagePlaceHolder = styled.img`
 const UserCommentContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.5rem;
+  margin: 0 0 1rem 1rem;
+  width: 100%;
 `;
 
-const UserComment = styled.div``;
+const UserComment = styled.div`
+  width: 80%;
+`;
 
-const Username = styled.span``;
+const Username = styled.div`
+  font-weight: bold;
+  margin: 0 0 0.25rem 0;
+`;
+
+const ReviewTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

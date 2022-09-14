@@ -1,11 +1,13 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Button from "./styled/elements/Button";
+// import Button from "./styled/elements/Button";
 
 const CommentPost = ({ animeId, fetchCommentSection }) => {
   let { user } = useAuth0();
   const [comment, setComment] = useState("");
+  const [characterCount, setCharacterCount] = useState(250);
+  const MAX_CHARACTER_LENGTH = 250;
 
   useEffect(() => {
     console.log(comment);
@@ -31,10 +33,14 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment();
-    fetchCommentSection(animeId);
-    console.log(`posted Comment =`, comment);
-    setComment("");
+    if (characterCount < 0 || comment.length < 1) {
+      return;
+    } else {
+      postComment();
+      fetchCommentSection(animeId);
+      console.log(`posted Comment =`, comment);
+      setComment("");
+    }
   };
   return (
     <form
@@ -42,7 +48,6 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
         handleSubmit(e);
       }}
     >
-      {/* <h3>Write Rev Here</h3> */}
       <CommentContainer>
         <CommentInput
           placeholder="What did you think?"
@@ -50,10 +55,15 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
             setComment(e.target.value);
           }}
           value={comment}
-        ></CommentInput>
-        <CommentButton type="Submit" disabled={user}>
-          Submit
-        </CommentButton>
+        />
+        <SubmitContainer>
+          <CharacterCount
+            characterCount={MAX_CHARACTER_LENGTH - comment.length}
+          >
+            {MAX_CHARACTER_LENGTH - comment.length}
+          </CharacterCount>
+          <CommentButton type="Submit">Submit</CommentButton>
+        </SubmitContainer>
       </CommentContainer>
     </form>
   );
@@ -74,13 +84,14 @@ const CommentInput = styled.textarea`
   }
 `;
 
-const CommentButton = styled(Button)`
-  position: absolute;
-  bottom: 0;
-  right: 0;
+const CommentButton = styled.button`
+  /* position: absolute; */
+  /* bottom: 0;
+  right: 0; */
   padding: 0.25rem 0.5rem;
   margin: 0.25rem;
   border-radius: 10px;
+  border: 1px solid var(--black);
 
   &:hover {
     background-color: var(--black);
@@ -90,7 +101,29 @@ const CommentButton = styled(Button)`
 `;
 
 const CommentContainer = styled.div`
-  position: relative;
+  display: flex;
+  /* position: relative; */
   border: 1px solid var(--black);
   border-radius: 7px;
+`;
+
+const CharacterCount = styled.span`
+  color: ${(props) =>
+    props.characterCount < 55
+      ? props.characterCount < 0
+        ? "var(--red)"
+        : "var(--dark-blue)"
+      : "var(--black)"};
+  /* font-size: 0.8rem; */
+  font-weight: 400;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+`;
+
+const SubmitContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* gap: 0.25rem; */
+  margin: 0 0 0.25rem 0;
 `;
