@@ -65,7 +65,7 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
         }),
       });
     }
-    refreshPage();
+    // refreshPage();
   };
 
   const postToHistory = async () => {
@@ -166,8 +166,8 @@ const StyledAnimeCard = styled.li`
 `;
 
 const ButtonContainer = styled.div`
-  /* display: ${(props) => (props.filter ? "none" : "flex")}; */
-  display: flex;
+  display: ${(props) => (props.filter ? "none" : "flex")};
+  /* display: flex; */
   flex-direction: column;
   position: absolute;
   top: 0;

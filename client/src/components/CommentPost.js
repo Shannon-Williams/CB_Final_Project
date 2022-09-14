@@ -33,12 +33,11 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (characterCount < 0 || comment.length < 1) {
+    if (MAX_CHARACTER_LENGTH - comment.length < 0 || comment.length < 1) {
       return;
     } else {
       postComment();
       fetchCommentSection(animeId);
-      console.log(`posted Comment =`, comment);
       setComment("");
     }
   };
@@ -74,7 +73,8 @@ export default CommentPost;
 const CommentInput = styled.textarea`
   height: 75px;
   width: 80%;
-  padding: 0.25rem 0 0 1rem;
+  /* padding: 0.25rem 0 0 1rem; */
+  margin: 0.25rem 0 0 0.5rem;
   resize: none;
   border: none;
   background-color: var(--white);

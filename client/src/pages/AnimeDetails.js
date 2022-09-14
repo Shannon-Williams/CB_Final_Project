@@ -159,7 +159,7 @@ const AnimeDetails = () => {
 export default AnimeDetails;
 
 const Wrapper = styled.div`
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
     url(${homepageBg});
