@@ -60,10 +60,12 @@ const Profile = ({}) => {
   };
 
   const fetchHistoryProfile = async () => {
+    setHasList(false);
     const res = await fetch(`/api/history/${user?.sub}`);
     const { data } = await res.json();
     console.log(`Profile:History`, data);
     setHistoryList(data);
+    setHasList(true);
     return data;
   };
 
@@ -199,20 +201,26 @@ const Profile = ({}) => {
           ) : (
             <LoadingScreen />
           ))}
-        {profileTypeId === "history" && (
-          <AnimeList
-            animeList={historyList}
-            grayscale={true}
-            fetchAllLists={fetchAllLists}
-          />
-        )}
-        {profileTypeId === "watchlist" && (
-          <AnimeList
-            animeList={watchlist}
-            grayscale={grayscale ? 1 : 0}
-            fetchAllLists={fetchAllLists}
-          />
-        )}
+        {profileTypeId === "history" &&
+          (hasList ? (
+            <AnimeList
+              animeList={historyList}
+              grayscale={true}
+              fetchAllLists={fetchAllLists}
+            />
+          ) : (
+            <LoadingScreen />
+          ))}
+        {profileTypeId === "watchlist" &&
+          (hasList ? (
+            <AnimeList
+              animeList={watchlist}
+              grayscale={grayscale ? 1 : 0}
+              fetchAllLists={fetchAllLists}
+            />
+          ) : (
+            <LoadingScreen />
+          ))}
       </ListContainer>
       {/* <Outlet /> */}
     </Wrapper>
