@@ -122,6 +122,11 @@ const Profile = ({}) => {
     }
   }, [user]);
 
+  const fetchAllLists = () => {
+    fetchFavourtieProfile();
+    fetchWatchlistProfile();
+    fetchHistoryProfile();
+  };
   useEffect(() => {
     if (user) {
       // fetchProfileBanner();
@@ -131,15 +136,9 @@ const Profile = ({}) => {
     }
   }, [user, profileTypeId]);
 
-  const fetchAllLists = () => {
-    fetchFavourtieProfile();
-    fetchWatchlistProfile();
-    fetchHistoryProfile();
-  };
-
-  useEffect(() => {
-    console.log(`loading state`, loading);
-  }, [loading]);
+  // useEffect(() => {
+  //   console.log(`loading state`, loading);
+  // }, [loading]);
 
   return !loading ? (
     <Wrapper>

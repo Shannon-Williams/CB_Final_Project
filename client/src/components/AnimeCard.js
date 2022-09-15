@@ -47,7 +47,9 @@ const AnimeCard = ({
 
   const updateUserLists = async () => {
     setLoading(true);
+
     if (profileTypeId === "favourites") {
+      // setLoading(true);
       const res = await fetch(`/api/favourite`, {
         method: "PATCH",
         headers: {
@@ -62,8 +64,10 @@ const AnimeCard = ({
       });
       // fetchFavourtieProfile();
       fetchAllLists();
-      setLoading(false);
+      // setLoading(false);
     } else {
+      setLoading(true);
+      // setLoading(true);
       const res = await fetch(`/api/${profileTypeId}`, {
         method: "PATCH",
         headers: {
@@ -77,6 +81,7 @@ const AnimeCard = ({
         }),
       });
       fetchAllLists();
+      // setLoading(false);
     }
     // refreshPage();
   };

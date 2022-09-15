@@ -108,23 +108,29 @@ const getFavourites = async (req, res) => {
   const { id } = req.params;
   console.log(`dbH add to fav this should be define`, id);
   const client = new MongoClient(MONGO_URI, options);
-  await client.connect();
-  const db = client.db("finalProject");
-  const query = { _id: id }; // should be user id from the request
-  const result = await db.collection("users").findOne(query);
 
-  const favouritesAnimeList = result?.profile?.favourites;
+  try {
+    await client.connect();
+    const db = client.db("finalProject");
+    const query = { _id: id }; // should be user id from the request
+    const result = await db.collection("users").findOne(query);
 
-  result
-    ? res.status(200).json({
-        data: favouritesAnimeList,
-        message: "Favourite Anime Found",
-      })
-    : res.status(404).json({
-        data: favouritesAnimeList,
-        message: "Something Went Wrong",
-      });
-  client.close();
+    const favouritesAnimeList = result?.profile?.favourites;
+
+    result
+      ? res.status(200).json({
+          data: favouritesAnimeList,
+          message: "Favourite Anime Found",
+        })
+      : res.status(404).json({
+          data: favouritesAnimeList,
+          message: "Something Went Wrong",
+        });
+  } catch (e) {
+    res.status(500).json({ status: 500, message: err.message });
+  } finally {
+    client.close();
+  }
 };
 
 const updateUserLists = async (req, res) => {
@@ -281,26 +287,31 @@ const addToWatchlist = async (req, res) => {
 
 const getWatchlist = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-  await client.connect();
-  const db = client.db("finalProject");
-  const { id } = req.params;
-  console.log(`dbH add to wl`, id);
-  const query = { _id: id }; // should be user id from the request
-  const result = await db.collection("users").findOne(query);
 
-  const watchlistAnimeList = result?.profile?.watchlist;
+  try {
+    await client.connect();
+    const db = client.db("finalProject");
+    const { id } = req.params;
+    console.log(`dbH add to wl`, id);
+    const query = { _id: id }; // should be user id from the request
+    const result = await db.collection("users").findOne(query);
 
-  result
-    ? res.status(200).json({
-        data: watchlistAnimeList,
-        message: "Watchlist Anime Found",
-      })
-    : res.status(404).json({
-        data: watchlistAnimeList,
-        message: "Something Went Wrong",
-      });
+    const watchlistAnimeList = result?.profile?.watchlist;
 
-  client.close();
+    result
+      ? res.status(200).json({
+          data: watchlistAnimeList,
+          message: "Watchlist Anime Found",
+        })
+      : res.status(404).json({
+          data: watchlistAnimeList,
+          message: "Something Went Wrong",
+        });
+  } catch (e) {
+    res.status(500).json({ status: 500, message: err.message });
+  } finally {
+    client.close();
+  }
 };
 
 const deleteFromWatchlist = async (req, res) => {
@@ -360,23 +371,29 @@ const addToHistory = async (req, res) => {
 
 const getHistory = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-  await client.connect();
-  const db = client.db("finalProject");
-  const { id } = req.params;
-  const query = { _id: id }; // should be user id from the request
-  const result = await db.collection("users").findOne(query);
+  try {
+    await client.connect();
+    const db = client.db("finalProject");
+    const { id } = req.params;
+    const query = { _id: id }; // should be user id from the request
+    const result = await db.collection("users").findOne(query);
 
-  const historyAnimeList = result?.profile?.history;
+    const historyAnimeList = result?.profile?.history;
 
-  result
-    ? res.status(200).json({
-        data: historyAnimeList,
-        message: "history Anime Found",
-      })
-    : res.status(404).json({
-        data: historyAnimeList,
-        message: "Something Went Wrong",
-      });
+    result
+      ? res.status(200).json({
+          data: historyAnimeList,
+          message: "history Anime Found",
+        })
+      : res.status(404).json({
+          data: historyAnimeList,
+          message: "Something Went Wrong",
+        });
+  } catch (e) {
+    res.status(500).json({ status: 500, message: err.message });
+  } finally {
+    client.close();
+  }
 };
 
 const deleteFromHistory = async (req, res) => {
