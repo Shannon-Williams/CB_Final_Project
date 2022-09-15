@@ -6,14 +6,16 @@ import ProfileTabs from "../components/ProfileTabs";
 import styled from "styled-components";
 import homepageBg from "../assets/biganime.png";
 import DefaultProfileBanner from "../components/DefaultProfileBanner";
+import LoadingScreen from "../components/LoadingScreen";
 
 const Profile = ({}) => {
   const { user, isLoading } = useAuth0();
   const [favouriteList, setFavouriteList] = useState([]);
   const [historyList, setHistoryList] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [base64, setBase64] = useState("");
+  const [hasBanner, setHasBanner] = useState(false);
   const grayscale = true;
 
   const handleOnChange = (e) => {
@@ -77,7 +79,8 @@ const Profile = ({}) => {
   const handleSumbit = (e) => {
     e.preventDefault();
     updateUserProfileBanner(`/api/user`, user?.sub, base64);
-    setBase64("");
+    setHasBanner(true);
+    // setBase64(null);
     console.log(`this probably worked`);
   };
 
@@ -85,7 +88,10 @@ const Profile = ({}) => {
     if (user) {
       const res = await fetch(`/api/user/${user?.sub}`);
       const { data } = await res.json();
+
       setBase64(data);
+      setHasBanner(data);
+      setLoading(false);
       return data;
     }
   };
@@ -135,9 +141,9 @@ const Profile = ({}) => {
     }
   }, [user, profileTypeId]);
 
-  // useEffect(() => {
-  //   console.log(`loading state`, loading);
-  // }, [loading]);
+  useEffect(() => {
+    console.log(`base64 state`, base64);
+  }, [base64]);
 
   return !loading ? (
     <Wrapper>
@@ -150,16 +156,18 @@ const Profile = ({}) => {
           // </label>
         )}
         <form onSubmit={handleSumbit}>
-          {!base64 && (
+          {!hasBanner && (
             <FileInputContainer>
-              <FileInput
-                type={"file"}
-                id={"file"}
-                accept={"images/*"}
-                onChange={handleOnChange}
-              />
-              <StyledLabel Htmlfor={"file"}>Choose a Photo</StyledLabel>
-              <ProfileSubmitButton type="submit">Submit</ProfileSubmitButton>
+              <StyledLabel Htmlfor={"file"}>
+                <FileInput
+                  type={"file"}
+                  id={"file"}
+                  accept={"images/*"}
+                  onChange={handleOnChange}
+                />
+                Choose a Photo
+              </StyledLabel>
+              <ProfileSubmitButton type="submit">Save</ProfileSubmitButton>
             </FileInputContainer>
           )}
         </form>
@@ -195,7 +203,9 @@ const Profile = ({}) => {
       {/* <Outlet /> */}
     </Wrapper>
   ) : (
-    <LoadingTest>Loading...</LoadingTest>
+    <Wrapper>
+      <LoadingScreen />
+    </Wrapper>
   );
 };
 
@@ -237,9 +247,10 @@ const ProfileSubmitButton = styled.button`
 `;
 
 const ProfileBannerImage = styled.img`
-  object-fit: cover;
   height: 500px;
   width: auto;
+  max-width: 100vw;
+  object-fit: cover;
   /* width: 100vw; */
 `;
 

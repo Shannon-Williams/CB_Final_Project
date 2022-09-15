@@ -3,11 +3,11 @@ import { BsCardImage } from "react-icons/bs";
 
 const DefaultProfileBanner = () => {
   return (
-    <Label htmlFor="file">
-      <DefaultBanner>
-        <BsCardImage color={"var(--white)"} size={100} />
-      </DefaultBanner>
-    </Label>
+    // <Label htmlFor="file">
+    <DefaultBanner>
+      <BsCardImage color={"var(--white)"} size={100} />
+    </DefaultBanner>
+    // </Label>
   );
 };
 
