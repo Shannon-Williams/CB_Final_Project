@@ -28,6 +28,7 @@ const addUser = async (req, res) => {
         history: [],
         ratings: [],
       },
+      profileBanner: null,
     };
     const existingUser = await db
       .collection("users")
@@ -162,6 +163,56 @@ const updateUserLists = async (req, res) => {
   } catch (err) {
     res.status(500).json({ status: 500, message: err.message });
   }
+};
+
+const addProfileBanner = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+
+  const { profileBanner, id } = req.body;
+
+  try {
+    const query = { _id: id };
+    const value = { $set: { profileBanner: profileBanner } };
+
+    const userProfile = await db
+      .collection("users")
+      .findOneAndUpdate(query, value);
+
+    userProfile
+      ? res.status(200).json({
+          data: userProfile,
+          message: "Profile Banner Added",
+        })
+      : res.status(404).json({
+          data: userProfile,
+          message: "Something Went Wrong",
+        });
+
+    client.close();
+  } catch (err) {
+    res.status(500).json({ status: 500, message: err.message });
+  }
+};
+
+const getProfileBanner = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("finalProject");
+  const { id } = req.params;
+  const query = { _id: id }; // should be user id from the request
+  const result = await db.collection("users").findOne(query);
+
+  result
+    ? res.status(200).json({
+        data: result.profileBanner,
+        message: "Profile Banner Found",
+      })
+    : res.status(404).json({
+        data: result,
+        message: "Something Went Wrong",
+      });
 };
 
 const deleteFromFavourites = async (req, res) => {
@@ -534,4 +585,6 @@ module.exports = {
   getComments,
   deleteComment,
   updateUserLists,
+  addProfileBanner,
+  getProfileBanner,
 };

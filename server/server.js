@@ -17,7 +17,8 @@ const commentsRouter = require("./Routes/comments.routes");
 const animeRouter = require("./Routes/anime.routes");
 const userRouter = require("./Routes/user.routes");
 
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb" }));
 //
 // const verifyJwt = jwt({
 //   secret: jwks.expressJwtSecret({

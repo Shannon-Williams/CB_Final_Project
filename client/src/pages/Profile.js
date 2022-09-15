@@ -11,8 +11,8 @@ const Profile = ({}) => {
   const [favouriteList, setFavouriteList] = useState([]);
   const [historyList, setHistoryList] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
-  const [loading, setLoading] = useState(false);
 
+  const [loading, setLoading] = useState(false);
   const [base64, setBase64] = useState("");
 
   const handleOnChange = (e) => {
@@ -59,9 +59,50 @@ const Profile = ({}) => {
     return data;
   };
 
+  const updateUserProfileBanner = async (endpoint, userId, base64String) => {
+    const res = await fetch(`${endpoint}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: userId,
+        profileBanner: base64String,
+      }),
+    });
+  };
+
+  const handleSumbit = (e) => {
+    e.preventDefault();
+    updateUserProfileBanner(`/api/user`, user?.sub, base64);
+    setBase64("");
+    console.log(`this probably worked`);
+  };
+
+  const getProfileBanner = async () => {
+    const res = await fetch(`/api/user/${user?.sub}`);
+    const { data } = await res.json();
+    setBase64(data);
+    return data;
+  };
+
+  useEffect(() => {
+    if (user) {
+      getProfileBanner();
+    } else {
+      setBase64(null);
+    }
+  }, [base64]);
+
   useEffect(() => {
     if (user) {
       setLoading(true);
+      if (user) {
+        getProfileBanner();
+      } else {
+        setBase64(null);
+      }
       fetchFavourtieProfile();
       fetchWatchlistProfile();
       fetchHistoryProfile();
@@ -71,12 +112,17 @@ const Profile = ({}) => {
 
   return !loading ? (
     <Wrapper>
-      {/* My Profile Page for {user?.given_name} */}
-      <img src={base64} />
-      <form>
-        <input type={"file"} onChange={handleOnChange} />
-        {console.log(`this should be base64`, base64)}
-      </form>
+      <ProfileBannerContainer>
+        <ProfileBannerImage src={base64} />
+        <form onSubmit={handleSumbit}>
+          {!base64 && (
+            <>
+              <input type={"file"} onChange={handleOnChange} />
+              <ProfileSubmitButton type="submit">Submit</ProfileSubmitButton>
+            </>
+          )}
+        </form>
+      </ProfileBannerContainer>
       <ProfileTabs />
       <ListContainer>
         {profileTypeId === "favourites" && (
@@ -121,3 +167,12 @@ const Wrapper = styled.div`
 const ListContainer = styled.div`
   /* border: 1px solid black; */
 `;
+
+const ProfileSubmitButton = styled.button`
+  color: black;
+  background-color: whitesmoke;
+`;
+
+const ProfileBannerImage = styled.img``;
+
+const ProfileBannerContainer = styled.div``;
