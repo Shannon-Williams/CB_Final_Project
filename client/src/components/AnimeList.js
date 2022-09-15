@@ -8,6 +8,8 @@ const AnimeList = ({
   fetchFavourtieProfile,
   fetchAllLists,
 }) => {
+  console.log(`animelist animelist`, animeList);
+
   return (
     <StyledAnimeList>
       {animeList.map((anime) => {

@@ -21,6 +21,7 @@ const AnimeCard = ({
   const [filter, setFilter] = useState(true);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [hasBeenRemoved, setHasBeenRemoved] = useState(false);
 
   console.log(`animecard`, grayscale);
 
@@ -47,7 +48,7 @@ const AnimeCard = ({
 
   const updateUserLists = async () => {
     setLoading(true);
-
+    setHasBeenRemoved(true);
     if (profileTypeId === "favourites") {
       // setLoading(true);
       const res = await fetch(`/api/favourite`, {
@@ -110,9 +111,10 @@ const AnimeCard = ({
     });
   };
 
-  return !loading ? (
+  // return !loading ? (
+  return (
     <Container>
-      <Wrapper>
+      <Wrapper hasBeenRemoved={hasBeenRemoved}>
         <Link style={{ textDecoration: "none" }} to={`/anime/${anime.mal_id}`}>
           <StyledAnimeCard
             filter={filter ? 1 : 0}
@@ -147,9 +149,12 @@ const AnimeCard = ({
         </ButtonContainer>
       )}
     </Container>
-  ) : (
-    <TestLoading>Loading...</TestLoading>
   );
+  // : (
+  //   <StyledAnimeCard>
+  //     <LoadingScreen />
+  //   </StyledAnimeCard>
+  // );
 };
 
 export default AnimeCard;
@@ -162,6 +167,8 @@ const TestLoading = styled.div`
 
 const Wrapper = styled.div`
   /* position: relative; */
+  display: ${(props) => (props.hasBeenRemoved ? "none" : "inital")};
+
   & :hover {
     transition: all 0.4s;
     cursor: pointer;

@@ -14,6 +14,7 @@ const Profile = ({}) => {
   const [historyList, setHistoryList] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hasList, setHasList] = useState(false);
   const [base64, setBase64] = useState("");
   const [hasBanner, setHasBanner] = useState(false);
   const grayscale = true;
@@ -39,18 +40,22 @@ const Profile = ({}) => {
   }, [profileTypeId]);
 
   const fetchFavourtieProfile = async () => {
+    setHasList(false);
     const res = await fetch(`/api/favourite/${user?.sub}`);
     const { data } = await res.json();
     console.log(`Profile:favourite`, data);
     setFavouriteList(data);
+    setHasList(true);
     return data;
   };
 
   const fetchWatchlistProfile = async () => {
+    setHasList(false);
     const res = await fetch(`/api/watchlist/${user?.sub}`);
     const { data } = await res.json();
     console.log(`Profile:watchlist`, data);
     setWatchlist(data);
+    setHasList(true);
     return data;
   };
 
@@ -128,16 +133,22 @@ const Profile = ({}) => {
   }, [user]);
 
   const fetchAllLists = () => {
+    // setHasBanner(false);
     fetchFavourtieProfile();
     fetchWatchlistProfile();
     fetchHistoryProfile();
+    // setHasList(true);
   };
+
   useEffect(() => {
     if (user) {
       // fetchProfileBanner();
-      fetchFavourtieProfile();
-      fetchWatchlistProfile();
-      fetchHistoryProfile();
+      // fetchFavourtieProfile();
+      // fetchWatchlistProfile();
+      // fetchHistoryProfile();
+      // setLoading(false);
+      fetchAllLists();
+      console.log(`hasList`, hasList);
     }
   }, [user, profileTypeId]);
 
@@ -176,15 +187,18 @@ const Profile = ({}) => {
         <ProfileTabs />
       </Background>
       <ListContainer>
-        {profileTypeId === "favourites" && (
-          <AnimeList
-            animeList={favouriteList}
-            profileTypeId={profileTypeId}
-            grayscale={true}
-            fetchFavourtieProfile={fetchFavourtieProfile}
-            fetchAllLists={fetchAllLists}
-          />
-        )}
+        {profileTypeId === "favourites" &&
+          (hasList ? (
+            <AnimeList
+              animeList={favouriteList}
+              profileTypeId={profileTypeId}
+              grayscale={true}
+              fetchFavourtieProfile={fetchFavourtieProfile}
+              fetchAllLists={fetchAllLists}
+            />
+          ) : (
+            <LoadingScreen />
+          ))}
         {profileTypeId === "history" && (
           <AnimeList
             animeList={historyList}
