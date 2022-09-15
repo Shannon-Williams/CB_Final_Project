@@ -5,13 +5,14 @@ import AnimeList from "../components/AnimeList";
 import ProfileTabs from "../components/ProfileTabs";
 import styled from "styled-components";
 import homepageBg from "../assets/biganime.png";
+import DefaultProfileBanner from "../components/DefaultProfileBanner";
 
 const Profile = ({}) => {
   const { user, isLoading } = useAuth0();
   const [favouriteList, setFavouriteList] = useState([]);
   const [historyList, setHistoryList] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [base64, setBase64] = useState("");
   const grayscale = true;
 
@@ -108,12 +109,10 @@ const Profile = ({}) => {
   // }, []);
 
   const fetchProfileBanner = async () => {
-    setLoading(true);
+    // setLoading(true);
     await getProfileBanner();
-    setLoading(false);
-    // await fetchFavourtieProfile();
-    // await fetchWatchlistProfile();
-    // await fetchHistoryProfile();
+    // setLoading(false);
+    console.log(`loading`, loading);
   };
 
   useEffect(() => {
@@ -143,13 +142,25 @@ const Profile = ({}) => {
   return !loading ? (
     <Wrapper>
       <ProfileBannerContainer>
-        <ProfileBannerImage src={base64} />
+        {base64 ? (
+          <ProfileBannerImage src={base64} />
+        ) : (
+          // <label htmlFor="file">
+          <DefaultProfileBanner />
+          // </label>
+        )}
         <form onSubmit={handleSumbit}>
           {!base64 && (
-            <>
-              <input type={"file"} onChange={handleOnChange} />
+            <FileInputContainer>
+              <FileInput
+                type={"file"}
+                id={"file"}
+                accept={"images/*"}
+                onChange={handleOnChange}
+              />
+              <StyledLabel Htmlfor={"file"}>Choose a Photo</StyledLabel>
               <ProfileSubmitButton type="submit">Submit</ProfileSubmitButton>
-            </>
+            </FileInputContainer>
           )}
         </form>
       </ProfileBannerContainer>
@@ -211,8 +222,18 @@ const ListContainer = styled.div`
 `;
 
 const ProfileSubmitButton = styled.button`
-  color: black;
+  color: var(--black);
+  font-weight: bold;
   background-color: whitesmoke;
+  border-radius: 10px;
+  height: 2rem;
+  width: 8rem;
+
+  :hover {
+    color: var(--white);
+    background-color: var(--black);
+    border: 1px solid var(--white);
+  }
 `;
 
 const ProfileBannerImage = styled.img`
@@ -224,8 +245,10 @@ const ProfileBannerImage = styled.img`
 
 const ProfileBannerContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  border: 1px solid pink;
+  align-items: center;
+  /* border: 1px solid pink; */
   width: 100vw;
   /* margin: 0 0 1rem 0; */
   /* background: var(--black); */
@@ -245,4 +268,33 @@ const LoadingTest = styled.div`
   width: 100vw;
   background: red;
   border: 5px solid pink;
+`;
+
+const FileInput = styled.input`
+  display: none;
+`;
+
+const StyledLabel = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--black);
+  height: 2rem;
+  width: 10rem;
+  font-weight: bold;
+  background-color: var(--primary);
+  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--white);
+    background-color: var(--black);
+    border: 1px solid var(--white);
+  }
+`;
+
+const FileInputContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin: 0.75rem 0;
 `;
