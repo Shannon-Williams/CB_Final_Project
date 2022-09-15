@@ -69,7 +69,11 @@ const ListItem = styled.li`
 const UnorderedList = styled.ul`
   display: flex;
 
-  .is-active > li {
-    border-bottom: 2px solid blue;
+  .active > li {
+    color: var(--white);
   }
+
+  /* .is-active > li {
+    border-bottom: 2px solid blue;
+  } */
 `;

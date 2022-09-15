@@ -131,6 +131,12 @@ const Profile = ({}) => {
     }
   }, [user, profileTypeId]);
 
+  const fetchAllLists = () => {
+    fetchFavourtieProfile();
+    fetchWatchlistProfile();
+    fetchHistoryProfile();
+  };
+
   useEffect(() => {
     console.log(`loading state`, loading);
   }, [loading]);
@@ -157,13 +163,23 @@ const Profile = ({}) => {
             animeList={favouriteList}
             profileTypeId={profileTypeId}
             grayscale={true}
+            fetchFavourtieProfile={fetchFavourtieProfile}
+            fetchAllLists={fetchAllLists}
           />
         )}
         {profileTypeId === "history" && (
-          <AnimeList animeList={historyList} grayscale={true} />
+          <AnimeList
+            animeList={historyList}
+            grayscale={true}
+            fetchAllLists={fetchAllLists}
+          />
         )}
         {profileTypeId === "watchlist" && (
-          <AnimeList animeList={watchlist} grayscale={grayscale ? 1 : 0} />
+          <AnimeList
+            animeList={watchlist}
+            grayscale={grayscale ? 1 : 0}
+            fetchAllLists={fetchAllLists}
+          />
         )}
       </ListContainer>
       {/* <Outlet /> */}

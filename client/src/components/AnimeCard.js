@@ -10,7 +10,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
 import { useState } from "react";
 
-const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
+const AnimeCard = ({
+  anime,
+  profileTypeId,
+  grayscale,
+  fetchFavourtieProfile,
+  fetchAllLists,
+}) => {
   const { user } = useAuth0();
   const [filter, setFilter] = useState(true);
   const navigate = useNavigate();
@@ -40,6 +46,7 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
   };
 
   const updateUserLists = async () => {
+    setLoading(true);
     if (profileTypeId === "favourites") {
       const res = await fetch(`/api/favourite`, {
         method: "PATCH",
@@ -53,6 +60,9 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
           profileTypeId: profileTypeId,
         }),
       });
+      // fetchFavourtieProfile();
+      fetchAllLists();
+      setLoading(false);
     } else {
       const res = await fetch(`/api/${profileTypeId}`, {
         method: "PATCH",
@@ -66,6 +76,7 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
           profileTypeId: profileTypeId,
         }),
       });
+      fetchAllLists();
     }
     // refreshPage();
   };
@@ -132,11 +143,17 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
       )}
     </Container>
   ) : (
-    <div>Loading...</div>
+    <TestLoading>Loading...</TestLoading>
   );
 };
 
 export default AnimeCard;
+
+const TestLoading = styled.div`
+  width: 500px;
+  height: 200px;
+  background-color: blueviolet;
+`;
 
 const Wrapper = styled.div`
   /* position: relative; */
