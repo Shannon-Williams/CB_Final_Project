@@ -12,9 +12,11 @@ import { useState } from "react";
 
 const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
   const { user } = useAuth0();
-  const [filter, setFilter] = useState(grayscale);
+  const [filter, setFilter] = useState(true);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  console.log(`animecard`, grayscale);
 
   const refreshPage = () => {
     navigate(0);
@@ -97,7 +99,7 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
       <Wrapper>
         <Link style={{ textDecoration: "none" }} to={`/anime/${anime.mal_id}`}>
           <StyledAnimeCard
-            filter={filter}
+            filter={filter ? 1 : 0}
             onMouseEnter={() => {
               console.log(filter);
               setFilter(false);
@@ -105,7 +107,6 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
             onMouseLeave={() => {
               setFilter(true);
             }}
-            hover={true}
           >
             <Images src={`${anime?.images?.jpg?.large_image_url}`} />
           </StyledAnimeCard>
@@ -120,7 +121,8 @@ const AnimeCard = ({ anime, profileTypeId, grayscale }) => {
           onMouseLeave={() => {
             setFilter(true);
           }}
-          filter={filter}
+          // filter={filter}
+          filter={filter ? 1 : 0}
         >
           {profileTypeId && <RemoveButton onClickFunc={updateUserLists} />}
           <FavouriteButton onClickFunc={postToFavourties} />
@@ -153,6 +155,9 @@ const StyledAnimeCard = styled.li`
   overflow: hidden;
   /* border: 1px solid green; */
   width: 250px;
+  border: 3px solid var(--white);
+  outline-offset: 1px;
+  outline: 3px solid var(--black);
   /* height: 215px; */
 
   filter: grayscale(${(props) => (props.filter ? `${100}` : 0)});
@@ -167,6 +172,7 @@ const StyledAnimeCard = styled.li`
 
 const ButtonContainer = styled.div`
   display: ${(props) => (props.filter ? "none" : "flex")};
+  /* display: ${(props) => (props.filter ? "flex" : "none")}; */
   /* display: flex; */
   flex-direction: column;
   position: absolute;

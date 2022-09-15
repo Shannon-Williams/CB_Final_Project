@@ -11,9 +11,9 @@ const Profile = ({}) => {
   const [favouriteList, setFavouriteList] = useState([]);
   const [historyList, setHistoryList] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
-
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(null);
   const [base64, setBase64] = useState("");
+  const grayscale = true;
 
   const handleOnChange = (e) => {
     const files = e.target.files;
@@ -81,34 +81,59 @@ const Profile = ({}) => {
   };
 
   const getProfileBanner = async () => {
-    const res = await fetch(`/api/user/${user?.sub}`);
-    const { data } = await res.json();
-    setBase64(data);
-    return data;
+    if (user) {
+      const res = await fetch(`/api/user/${user?.sub}`);
+      const { data } = await res.json();
+      setBase64(data);
+      return data;
+    }
+  };
+
+  // useEffect(() => {
+  //   if (user) {
+  //     getProfileBanner();
+  //   } else {
+  //     setBase64(null);
+  //   }
+  // }, [base64]);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   if (user) {
+  //     getProfileBanner();
+  //   } else {
+  //     setBase64(null);
+  //   }
+  //   setLoading(false);
+  // }, []);
+
+  const fetchProfileBanner = async () => {
+    setLoading(true);
+    await getProfileBanner();
+    setLoading(false);
+    // await fetchFavourtieProfile();
+    // await fetchWatchlistProfile();
+    // await fetchHistoryProfile();
   };
 
   useEffect(() => {
-    if (user) {
-      getProfileBanner();
-    } else {
-      setBase64(null);
+    if (user !== "undefined") {
+      fetchProfileBanner();
     }
-  }, [base64]);
+  }, [user]);
 
   useEffect(() => {
     if (user) {
-      setLoading(true);
-      if (user) {
-        getProfileBanner();
-      } else {
-        setBase64(null);
-      }
+      // fetchProfileBanner();
       fetchFavourtieProfile();
       fetchWatchlistProfile();
       fetchHistoryProfile();
-      setLoading(false);
     }
   }, [user, profileTypeId]);
+
+  useEffect(() => {
+    console.log(`loading state`, loading);
+  }, [loading]);
 
   return !loading ? (
     <Wrapper>
@@ -123,7 +148,9 @@ const Profile = ({}) => {
           )}
         </form>
       </ProfileBannerContainer>
-      <ProfileTabs />
+      <Background>
+        <ProfileTabs />
+      </Background>
       <ListContainer>
         {profileTypeId === "favourites" && (
           <AnimeList
@@ -136,13 +163,13 @@ const Profile = ({}) => {
           <AnimeList animeList={historyList} grayscale={true} />
         )}
         {profileTypeId === "watchlist" && (
-          <AnimeList animeList={watchlist} grayscale={true} />
+          <AnimeList animeList={watchlist} grayscale={grayscale ? 1 : 0} />
         )}
       </ListContainer>
       {/* <Outlet /> */}
     </Wrapper>
   ) : (
-    <div>Loading...</div>
+    <LoadingTest>Loading...</LoadingTest>
   );
 };
 
@@ -173,6 +200,34 @@ const ProfileSubmitButton = styled.button`
   background-color: whitesmoke;
 `;
 
-const ProfileBannerImage = styled.img``;
+const ProfileBannerImage = styled.img`
+  object-fit: cover;
+  height: 500px;
+  width: auto;
+  /* width: 100vw; */
+`;
 
-const ProfileBannerContainer = styled.div``;
+const ProfileBannerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 1px solid pink;
+  width: 100vw;
+  /* margin: 0 0 1rem 0; */
+  /* background: var(--black); */
+`;
+
+const Background = styled.div`
+  display: flex;
+  background-color: var(--black);
+  width: 100vw;
+  justify-content: center;
+  padding: 1rem 0 0 0;
+  margin: 0 0 1.5rem 0;
+  border: 1px solid white;
+`;
+
+const LoadingTest = styled.div`
+  width: 100vw;
+  background: red;
+  border: 5px solid pink;
+`;

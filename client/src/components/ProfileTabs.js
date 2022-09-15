@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const profileTabsData = [
   {
-    title: "Favs",
+    title: "Favourites",
     path: "favourites",
   },
   {
@@ -44,7 +44,7 @@ const ProfileTabs = ({}) => {
 export default ProfileTabs;
 
 const Wrapper = styled.div`
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   width: 500px;
   /* border: 1px solid green; */
 `;
@@ -58,7 +58,7 @@ const ListItem = styled.li`
   color: black;
   text-decoration: none;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--red);
+  /* border-bottom: 1px solid var(--red); */
   font-size: 1.25rem;
   flex-grow: 1;
   flex-basis: 0;
