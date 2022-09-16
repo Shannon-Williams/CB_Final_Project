@@ -15,8 +15,6 @@ const addUser = async (req, res) => {
     await client.connect();
     const db = client.db("finalProject");
 
-    console.log(req.body);
-
     const newUser = {
       _id: req.body.sub,
       userFirstname: req.body.given_name,
@@ -83,7 +81,6 @@ const addToFavourites = async (req, res) => {
 
   const { anime, id } = req.body;
 
-  console.log(`dbH add to fav`, id);
   const query = { _id: id };
   const favouritedAnime = {
     $addToSet: { "profile.favourites": anime },
@@ -106,7 +103,6 @@ const addToFavourites = async (req, res) => {
 
 const getFavourites = async (req, res) => {
   const { id } = req.params;
-  console.log(`dbH add to fav this should be define`, id);
   const client = new MongoClient(MONGO_URI, options);
 
   try {
@@ -139,13 +135,11 @@ const updateUserLists = async (req, res) => {
   const db = client.db("finalProject");
 
   const { anime, id, profileTypeId } = req.body;
-  console.log(`fav patch info`, id, profileTypeId);
 
   try {
     const query = { _id: id };
 
     const list = `profile.${profileTypeId}`;
-    console.log(`the string list is`, list);
 
     const removedAnime = {
       $pull: { [list]: { mal_id: Number(anime.mal_id) } },
@@ -227,13 +221,11 @@ const deleteFromFavourites = async (req, res) => {
   const db = client.db("finalProject");
 
   const { anime, id, profileTypeId } = req.body;
-  console.log(`fav patch info`, id, profileTypeId);
 
   try {
     const query = { _id: id };
 
     const list = `profile.${profileTypeId}`;
-    console.log(`the string list is`, list);
 
     const removedAnime = {
       $pull: { [list]: { mal_id: Number(anime.mal_id) } },
@@ -292,7 +284,6 @@ const getWatchlist = async (req, res) => {
     await client.connect();
     const db = client.db("finalProject");
     const { id } = req.params;
-    console.log(`dbH add to wl`, id);
     const query = { _id: id };
     const result = await db.collection("users").findOne(query);
 
@@ -463,15 +454,12 @@ const getRatings = async (req, res) => {
   const { user_id, anime_id } = req.query;
   const query = { user_id: user_id, anime_id: Number(anime_id) };
 
-  console.log(`getRating `, query);
-
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
 
   try {
     const result = await db.collection("ratings").findOne(query);
-    console.log(`db res`, result);
 
     result
       ? res.status(200).json({
@@ -543,7 +531,6 @@ const getComments = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  console.log(`Params `, req.params);
   const { anime_id } = req.params;
   const query = { anime_id: Number(anime_id) };
   const result = await db.collection("comments").find(query).toArray();

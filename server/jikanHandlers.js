@@ -2,7 +2,6 @@ const fetch = require("node-fetch");
 
 const getAnimeSearchByQuery = async (req, res) => {
   const { q, genre } = req.query;
-  console.log(`Animesearch1 q`, q, `genre`, genre, `params`, req.query);
 
   const fetchAnimeSearch = async () => {
     const res = await fetch(
@@ -19,7 +18,6 @@ const getAnimeSearchByQuery = async (req, res) => {
 
 const getAnimeSearchById = async (req, res) => {
   const { id } = req.params;
-  console.log(`API id is `, id);
   const fetchAnimeSearch = async () => {
     const res = await fetch(`https://api.jikan.moe/v4/anime/${id}/full`);
     const { data } = await res.json();

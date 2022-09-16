@@ -26,7 +26,6 @@ const Searchbar = ({}) => {
     const res = await fetch(`/api/anime/search/?q=${debouncedSearch}`);
     const { data } = await res.json();
     setSearchResults(data);
-    console.log(`the search is`, data);
     setLoading(false);
     return data;
   };

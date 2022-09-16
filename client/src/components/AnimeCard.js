@@ -22,17 +22,14 @@ const AnimeCard = ({
   const [loading, setLoading] = useState(false);
   const [hasBeenRemoved, setHasBeenRemoved] = useState(false);
 
-  console.log(`animecard`, grayscale);
-
   const refreshPage = () => {
     navigate(0);
   };
-  console.log(useParams());
+
   let profileId = useParams().profileTypeId;
   profileTypeId = profileTypeId ? profileTypeId : profileId;
 
   const postToFavourties = async () => {
-    console.log(`Anime is this`, anime);
     const res = await fetch(`/api/favourite`, {
       method: "POST",
       headers: {
@@ -79,7 +76,6 @@ const AnimeCard = ({
   };
 
   const postToHistory = async () => {
-    console.log(`Anime is this`, anime);
     const res = await fetch(`/api/history`, {
       method: "POST",
       headers: {
@@ -91,7 +87,6 @@ const AnimeCard = ({
   };
 
   const postToWatchlist = async () => {
-    console.log(`Anime is this`, anime);
     const res = await fetch(`/api/watchlist`, {
       method: "POST",
       headers: {
@@ -109,7 +104,6 @@ const AnimeCard = ({
           <StyledAnimeCard
             filter={filter ? 1 : 0}
             onMouseEnter={() => {
-              console.log(filter);
               setFilter(false);
             }}
             onMouseLeave={() => {
@@ -123,7 +117,6 @@ const AnimeCard = ({
       {user && (
         <ButtonContainer
           onMouseEnter={() => {
-            console.log(filter);
             setFilter(false);
           }}
           onMouseLeave={() => {

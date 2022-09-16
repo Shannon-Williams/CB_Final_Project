@@ -29,19 +29,12 @@ const AnimeRating = ({ animeId }) => {
     );
 
     const data = await res.json();
-    console.log(`getRating data`, data);
     setRating(data?.data?.rating);
   };
   useEffect(() => {
-    console.log(`animeid`, animeId);
-    console.log(`animerating user`, user);
-
     fetchAnimeRating();
   }, [user]);
 
-  useEffect(() => {
-    console.log(`rating`, rating);
-  }, [rating]);
   return (
     <div>
       {[...Array(5)].map((star, index) => {

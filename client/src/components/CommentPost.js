@@ -8,11 +8,6 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
   const [characterCount, setCharacterCount] = useState(250);
   const MAX_CHARACTER_LENGTH = 250;
 
-  useEffect(() => {
-    console.log(comment);
-    console.log(animeId);
-  }, [comment]);
-
   const postComment = async () => {
     const res = await fetch(`/api/comments`, {
       method: "POST",

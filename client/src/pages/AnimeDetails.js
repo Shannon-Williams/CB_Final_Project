@@ -22,7 +22,6 @@ const AnimeDetails = () => {
   let { user } = useAuth0();
 
   const postToFavourties = async () => {
-    console.log(`Anime is this`, animeDetails);
     const res = await fetch(`/api/favourite`, {
       method: "POST",
       headers: {
@@ -34,7 +33,6 @@ const AnimeDetails = () => {
   };
 
   const postToHistory = async () => {
-    console.log(`Anime is this`, animeDetails);
     const res = await fetch(`/api/history`, {
       method: "POST",
       headers: {
@@ -46,7 +44,6 @@ const AnimeDetails = () => {
   };
 
   const postToWatchlist = async () => {
-    console.log(`Anime is this`, animeDetails);
     const res = await fetch(`/api/watchlist`, {
       method: "POST",
       headers: {
@@ -57,23 +54,19 @@ const AnimeDetails = () => {
     });
   };
 
-  console.log(`param is`, id);
 
   const fetchAnimeFullDetails = async () => {
     setLoading(true);
     const res = await fetch(`/api/anime/id/${id}`);
     const { data } = await res.json();
-    console.log(`anime details data`, data);
     setAnimeDetails(data);
     setLoading(false);
     return data;
   };
 
   const fetchCommentSection = async (id) => {
-    console.log(`fetchCommentSection`, id);
     const res = await fetch(`/api/comments/${id}`);
     const { data } = await res.json();
-    console.log(`anime comments data`, data);
     setCommentFeed(data);
     return data;
   };
@@ -81,7 +74,6 @@ const AnimeDetails = () => {
   useEffect(() => {
     fetchAnimeFullDetails();
     fetchCommentSection(id);
-    console.log(animeDetails);
   }, [id]);
 
   return !loading ? (

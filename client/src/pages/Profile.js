@@ -36,15 +36,10 @@ const Profile = ({}) => {
 
   let { profileTypeId } = useParams();
 
-  useEffect(() => {
-    console.log(`params are`, profileTypeId);
-  }, [profileTypeId]);
-
   const fetchFavourtieProfile = async () => {
     setHasList(false);
     const res = await fetch(`/api/favourite/${user?.sub}`);
     const { data } = await res.json();
-    console.log(`Profile:favourite`, data);
     setFavouriteList(data);
     setHasList(true);
     return data;
@@ -54,7 +49,6 @@ const Profile = ({}) => {
     setHasList(false);
     const res = await fetch(`/api/watchlist/${user?.sub}`);
     const { data } = await res.json();
-    console.log(`Profile:watchlist`, data);
     setWatchlist(data);
     setHasList(true);
     return data;
@@ -64,7 +58,6 @@ const Profile = ({}) => {
     setHasList(false);
     const res = await fetch(`/api/history/${user?.sub}`);
     const { data } = await res.json();
-    console.log(`Profile:History`, data);
     setHistoryList(data);
     setHasList(true);
     return data;
@@ -88,8 +81,6 @@ const Profile = ({}) => {
     e.preventDefault();
     updateUserProfileBanner(`/api/user`, user?.sub, base64);
     setHasBanner(true);
-    // setBase64(null);
-    console.log(`this probably worked`);
   };
 
   const getProfileBanner = async () => {
@@ -104,29 +95,8 @@ const Profile = ({}) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (user) {
-  //     getProfileBanner();
-  //   } else {
-  //     setBase64(null);
-  //   }
-  // }, [base64]);
-
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if (user) {
-  //     getProfileBanner();
-  //   } else {
-  //     setBase64(null);
-  //   }
-  //   setLoading(false);
-  // }, []);
-
   const fetchProfileBanner = async () => {
-    // setLoading(true);
     await getProfileBanner();
-    // setLoading(false);
-    console.log(`loading`, loading);
   };
 
   useEffect(() => {
@@ -145,19 +115,9 @@ const Profile = ({}) => {
 
   useEffect(() => {
     if (user) {
-      // fetchProfileBanner();
-      // fetchFavourtieProfile();
-      // fetchWatchlistProfile();
-      // fetchHistoryProfile();
-      // setLoading(false);
       fetchAllLists();
-      console.log(`hasList`, hasList);
     }
   }, [user, profileTypeId]);
-
-  useEffect(() => {
-    console.log(`base64 state`, base64);
-  }, [base64]);
 
   return !loading ? (
     <Wrapper>
