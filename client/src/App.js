@@ -7,6 +7,7 @@ import LoginPage from "./components/LoginPage";
 import Homepage from "./pages/Homepage";
 import AnimeDetails from "./pages/AnimeDetails";
 import Profile from "./pages/Profile";
+import NotFound from "./components/NotFound";
 
 function App() {
   const { user, getAccessTokenSilently } = useAuth0();
@@ -27,7 +28,7 @@ function App() {
           <Route path="/signin" element={<div>sign in page</div>} />
           <Route path="/signout" element={<div>sign out page</div>} />
           <Route path="/loggedin" element={<LoginPage />} />
-          <Route path="*" element={<div>404 Error</div>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
     </BrowserRouter>
