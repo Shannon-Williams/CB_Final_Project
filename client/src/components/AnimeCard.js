@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import styled from "styled-components";
 import FavouriteButton from "./FavouriteButton";
 import HistoryButton from "./HistoryButton";
-import Watchlist from "./WatchlistButton";
 import RemoveButton from "./RemoveButton";
-import { useAuth0 } from "@auth0/auth0-react";
-import styled from "styled-components";
-import { useState } from "react";
+import Watchlist from "./WatchlistButton";
 
 const AnimeCard = ({
   anime,
