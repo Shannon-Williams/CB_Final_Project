@@ -38,6 +38,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding: 0.75rem;
   color: var(--white);
+  background-color: var(--black);
 `;
 
 const Logo = styled.div`

@@ -5,5 +5,6 @@ const StyledAnimeList = styled.ul`
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  margin: 1.5rem 0 0 0;
 `;
 export default StyledAnimeList;

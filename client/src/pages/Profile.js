@@ -7,6 +7,7 @@ import styled from "styled-components";
 import homepageBg from "../assets/biganime.png";
 import DefaultProfileBanner from "../components/DefaultProfileBanner";
 import LoadingScreen from "../components/LoadingScreen";
+import { LoadingCard } from "../components/LoadingScreen";
 
 const Profile = ({}) => {
   const { user, isLoading } = useAuth0();
@@ -199,7 +200,7 @@ const Profile = ({}) => {
               fetchAllLists={fetchAllLists}
             />
           ) : (
-            <LoadingScreen />
+            <LoadingCard />
           ))}
         {profileTypeId === "history" &&
           (hasList ? (
@@ -209,7 +210,7 @@ const Profile = ({}) => {
               fetchAllLists={fetchAllLists}
             />
           ) : (
-            <LoadingScreen />
+            <LoadingCard />
           ))}
         {profileTypeId === "watchlist" &&
           (hasList ? (
@@ -219,7 +220,7 @@ const Profile = ({}) => {
               fetchAllLists={fetchAllLists}
             />
           ) : (
-            <LoadingScreen />
+            <LoadingCard />
           ))}
       </ListContainer>
       {/* <Outlet /> */}
@@ -293,8 +294,10 @@ const Background = styled.div`
   width: 100vw;
   justify-content: center;
   padding: 1rem 0 0 0;
-  margin: 0 0 1.5rem 0;
-  border: 1px solid white;
+  /* margin: 0 0 1.5rem 0; */
+  /* border: 1px solid white; */
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 `;
 
 const LoadingTest = styled.div`

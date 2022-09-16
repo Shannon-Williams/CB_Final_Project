@@ -49,19 +49,34 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
     >
       <CommentContainer>
         <CommentInput
-          placeholder="What did you think?"
+          placeholder={
+            user
+              ? "What did you think?"
+              : `Login or Signup to tell us what you think!`
+          }
           onChange={(e) => {
             setComment(e.target.value);
           }}
           value={comment}
+          disabled={true}
         />
         <SubmitContainer>
-          <CharacterCount
+          {user && (
+            <CharacterCount
+              characterCount={MAX_CHARACTER_LENGTH - comment.length}
+            >
+              {MAX_CHARACTER_LENGTH - comment.length}
+            </CharacterCount>
+          )}
+          <CommentButton
+            type="Submit"
             characterCount={MAX_CHARACTER_LENGTH - comment.length}
+            disabled={
+              MAX_CHARACTER_LENGTH - comment.length <= 0 || !user ? true : false
+            }
           >
-            {MAX_CHARACTER_LENGTH - comment.length}
-          </CharacterCount>
-          <CommentButton type="Submit">Submit</CommentButton>
+            Submit
+          </CommentButton>
         </SubmitContainer>
       </CommentContainer>
     </form>
@@ -82,6 +97,12 @@ const CommentInput = styled.textarea`
   &:focus {
     outline: none;
   }
+
+  &:hover {
+    :disabled {
+      cursor: not-allowed;
+    }
+  }
 `;
 
 const CommentButton = styled.button`
@@ -93,10 +114,20 @@ const CommentButton = styled.button`
   border-radius: 10px;
   border: 1px solid var(--black);
 
+  :disabled {
+    cursor: not-allowed;
+  }
+
   &:hover {
     background-color: var(--black);
     color: white;
     font-weight: bold;
+
+    :disabled {
+      background-color: var(--white);
+      color: var(--black);
+      font-weight: normal;
+    }
   }
 `;
 
@@ -105,6 +136,7 @@ const CommentContainer = styled.div`
   /* position: relative; */
   border: 1px solid var(--black);
   border-radius: 7px;
+  margin: 1rem 0 0 0;
 `;
 
 const CharacterCount = styled.span`

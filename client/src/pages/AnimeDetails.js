@@ -13,6 +13,7 @@ import Watchlist from "../components/WatchlistButton";
 import homepageBg from "../assets/biganime.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import Tippy from "@tippyjs/react";
+import LoadingScreen from "../components/LoadingScreen";
 
 const AnimeDetails = () => {
   const { id } = useParams();
@@ -60,8 +61,7 @@ const AnimeDetails = () => {
   console.log(`param is`, id);
 
   const fetchAnimeFullDetails = async () => {
-    // setLoading(true);
-
+    setLoading(true);
     const res = await fetch(`/api/anime/id/${id}`);
     const { data } = await res.json();
     console.log(`anime details data`, data);
@@ -152,7 +152,7 @@ const AnimeDetails = () => {
       </DetailContainer>
     </Wrapper>
   ) : (
-    <div>Loading...</div>
+    <LoadingScreen />
   );
 };
 

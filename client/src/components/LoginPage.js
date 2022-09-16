@@ -28,8 +28,7 @@ const LoginPage = ({}) => {
 
   return (
     <div>
-      your are logged in
-      {JSON.stringify(user)}
+      {/* {JSON.stringify(user)} */}
       <Homepage />
     </div>
   );
