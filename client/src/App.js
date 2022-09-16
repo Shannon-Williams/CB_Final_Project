@@ -1,6 +1,4 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GlobalStyles from "./components/styled/GlobalStyles";
 import Layout from "./components/styled/Layout";
 import LoginPage from "./components/LoginPage";
@@ -10,8 +8,6 @@ import Profile from "./pages/Profile";
 import NotFound from "./components/NotFound";
 
 function App() {
-  const { user, getAccessTokenSilently } = useAuth0();
-
   return (
     <BrowserRouter>
       <GlobalStyles />

@@ -1,6 +1,5 @@
-import { Image } from "./styled/AnimeCard.styled";
 import { Link } from "react-router-dom";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import FavouriteButton from "./FavouriteButton";
 import HistoryButton from "./HistoryButton";
 import Watchlist from "./WatchlistButton";
@@ -18,19 +17,14 @@ const AnimeCard = ({
 }) => {
   const { user } = useAuth0();
   const [filter, setFilter] = useState(true);
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [hasBeenRemoved, setHasBeenRemoved] = useState(false);
-
-  const refreshPage = () => {
-    navigate(0);
-  };
 
   let profileId = useParams().profileTypeId;
   profileTypeId = profileTypeId ? profileTypeId : profileId;
 
   const postToFavourties = async () => {
-    const res = await fetch(`/api/favourite`, {
+    await fetch(`/api/favourite`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -44,7 +38,7 @@ const AnimeCard = ({
     setLoading(true);
     setHasBeenRemoved(true);
     if (profileTypeId === "favourites") {
-      const res = await fetch(`/api/favourite`, {
+      await fetch(`/api/favourite`, {
         method: "PATCH",
         headers: {
           Accept: "application/json",
@@ -59,7 +53,7 @@ const AnimeCard = ({
       fetchAllLists();
     } else {
       setLoading(true);
-      const res = await fetch(`/api/${profileTypeId}`, {
+      await fetch(`/api/${profileTypeId}`, {
         method: "PATCH",
         headers: {
           Accept: "application/json",
@@ -76,7 +70,7 @@ const AnimeCard = ({
   };
 
   const postToHistory = async () => {
-    const res = await fetch(`/api/history`, {
+    await fetch(`/api/history`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -87,7 +81,7 @@ const AnimeCard = ({
   };
 
   const postToWatchlist = async () => {
-    const res = await fetch(`/api/watchlist`, {
+    await fetch(`/api/watchlist`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -135,12 +129,6 @@ const AnimeCard = ({
 };
 
 export default AnimeCard;
-
-const TestLoading = styled.div`
-  width: 500px;
-  height: 200px;
-  background-color: blueviolet;
-`;
 
 const Wrapper = styled.div`
   display: ${(props) => (props.hasBeenRemoved ? "none" : "inital")};

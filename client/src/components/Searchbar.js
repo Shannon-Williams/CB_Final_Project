@@ -7,7 +7,7 @@ import AnimeList from "./AnimeList";
 import { AiOutlineSearch as SearchIcon } from "react-icons/ai";
 import useDebounce from "../hooks/useDebounce";
 
-const Searchbar = ({}) => {
+const Searchbar = () => {
   const [genreSelection, setGenreSelection] = useState("All");
   const [genres, setGenres] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,14 +33,6 @@ const Searchbar = ({}) => {
   useEffect(() => {
     if (debouncedSearch) fetchAnimeSearchResults();
   }, [debouncedSearch]);
-
-  useEffect(() => {
-    const sortedGenres = genres
-      .sort((a, b) => {
-        return b.count - a.count;
-      })
-      .slice(0, 12);
-  }, [genres]);
 
   const HandleSearch = () => {
     setSearchParams({ q: `${search}`, genre: `${genreSelection}` });

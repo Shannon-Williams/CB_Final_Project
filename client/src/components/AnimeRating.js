@@ -9,7 +9,7 @@ const AnimeRating = ({ animeId }) => {
   let { user } = useAuth0();
 
   const postAnimeRating = async (rating) => {
-    const res = await fetch(`/api/rating`, {
+    await fetch(`/api/rating`, {
       method: "POST",
       headers: {
         Accept: "application/json",

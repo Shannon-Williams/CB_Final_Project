@@ -1,15 +1,14 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const CommentPost = ({ animeId, fetchCommentSection }) => {
   let { user } = useAuth0();
   const [comment, setComment] = useState("");
-  const [characterCount, setCharacterCount] = useState(250);
   const MAX_CHARACTER_LENGTH = 250;
 
   const postComment = async () => {
-    const res = await fetch(`/api/comments`, {
+    await fetch(`/api/comments`, {
       method: "POST",
       headers: {
         Accept: "application/json",
