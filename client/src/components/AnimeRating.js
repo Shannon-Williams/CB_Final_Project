@@ -6,7 +6,7 @@ import styled from "styled-components";
 const AnimeRating = ({ animeId }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
-  let { user, isLoading } = useAuth0();
+  let { user } = useAuth0();
 
   const postAnimeRating = async (rating) => {
     const res = await fetch(`/api/rating`, {
@@ -46,7 +46,6 @@ const AnimeRating = ({ animeId }) => {
     <div>
       {[...Array(5)].map((star, index) => {
         const ratingValue = index + 1;
-        // console.log(ratingValue, index);
         return (
           <Star
             key={index}

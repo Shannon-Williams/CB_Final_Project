@@ -23,7 +23,6 @@ const LoadingContainer = styled.div`
   background-color: var(--black);
   width: 100%;
   height: 100vh;
-  /* height: 345px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,8 +32,6 @@ const LoadingCardContainer = styled.div`
   background-color: var(--black);
   width: 100vw;
   height: calc(100vh - 60vh);
-  /* height: 100vh; */
-  /* height: 345px; */
   display: flex;
   align-items: center;
   justify-content: center;

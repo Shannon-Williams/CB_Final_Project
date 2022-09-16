@@ -32,21 +32,8 @@ const Searchbar = ({}) => {
   };
 
   useEffect(() => {
-    //Search api
     if (debouncedSearch) fetchAnimeSearchResults();
   }, [debouncedSearch]);
-
-  // const fetchGenres = async () => {
-  //   const res = await fetch(`/api/anime/genres`);
-  //   const { data } = await res.json();
-  //   setGenres(data);
-  //   console.log(data);
-  //   return data;
-  // };
-
-  // useEffect(() => {
-  //   fetchGenres();
-  // }, []);
 
   useEffect(() => {
     const sortedGenres = genres
@@ -89,13 +76,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5rem;
-  /* margin: 2rem 0 0 0; */
-  /* justify-content: center; */
   align-items: center;
-  /* height: 95vh; */
 `;
 
-// Maybe this should be a form so we can hit enter to submit search, or add an eventlistener for enter
 const SearchBarContainer = styled.div`
   border: 3px var(--primary) solid;
   border-radius: 7px;
@@ -116,10 +99,6 @@ const StyledInput = styled(Input)`
   &:focus {
     outline: none;
   }
-
-  &::placeholder {
-    /* text-align: center; */
-  }
 `;
 
 const StyledButton = styled(Button)`
@@ -134,6 +113,4 @@ const StyledButton = styled(Button)`
 
 const AnimeListContainer = styled.div`
   width: 100%;
-  /* height: 1px; */
-  /* border: 1px green solid; */
 `;

@@ -1,7 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-// import Button from "./styled/elements/Button";
 
 const CommentPost = ({ animeId, fetchCommentSection }) => {
   let { user } = useAuth0();
@@ -88,7 +87,6 @@ export default CommentPost;
 const CommentInput = styled.textarea`
   height: 75px;
   width: 80%;
-  /* padding: 0.25rem 0 0 1rem; */
   margin: 0.25rem 0 0 0.5rem;
   resize: none;
   border: none;
@@ -106,9 +104,6 @@ const CommentInput = styled.textarea`
 `;
 
 const CommentButton = styled.button`
-  /* position: absolute; */
-  /* bottom: 0;
-  right: 0; */
   padding: 0.25rem 0.5rem;
   margin: 0.25rem;
   border-radius: 10px;
@@ -133,7 +128,6 @@ const CommentButton = styled.button`
 
 const CommentContainer = styled.div`
   display: flex;
-  /* position: relative; */
   border: 1px solid var(--black);
   border-radius: 7px;
   margin: 1rem 0 0 0;
@@ -146,7 +140,6 @@ const CharacterCount = styled.span`
         ? "var(--red)"
         : "var(--dark-blue)"
       : "var(--black)"};
-  /* font-size: 0.8rem; */
   font-weight: 400;
   padding: 0.25rem 0.5rem;
   margin: 0.25rem;
@@ -156,6 +149,5 @@ const SubmitContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  /* gap: 0.25rem; */
   margin: 0 0 0.25rem 0;
 `;

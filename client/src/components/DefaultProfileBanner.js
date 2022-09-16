@@ -3,11 +3,9 @@ import { BsCardImage } from "react-icons/bs";
 
 const DefaultProfileBanner = () => {
   return (
-    // <Label htmlFor="file">
     <DefaultBanner>
       <BsCardImage color={"var(--white)"} size={100} />
     </DefaultBanner>
-    // </Label>
   );
 };
 
@@ -20,10 +18,4 @@ const DefaultBanner = styled.div`
   background-color: var(--black);
   height: 500px;
   min-width: 700px;
-`;
-
-const Label = styled.label`
-  :hover {
-    cursor: pointer;
-  }
 `;

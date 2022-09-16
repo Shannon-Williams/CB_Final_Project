@@ -28,7 +28,6 @@ const LoginPage = ({}) => {
 
   return (
     <div>
-      {/* {JSON.stringify(user)} */}
       <Homepage />
     </div>
   );

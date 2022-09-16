@@ -39,6 +39,16 @@ const Wrapper = styled.div`
   padding: 0.75rem;
   color: var(--white);
   background-color: var(--black);
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1; */
+  transition: all 7ms;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+  }
 `;
 
 const Logo = styled.div`

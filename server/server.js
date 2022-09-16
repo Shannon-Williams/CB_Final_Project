@@ -19,7 +19,6 @@ const userRouter = require("./Routes/user.routes");
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
-//
 // const verifyJwt = jwt({
 //   secret: jwks.expressJwtSecret({
 //     cache: true,

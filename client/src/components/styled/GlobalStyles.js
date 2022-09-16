@@ -60,11 +60,9 @@ export default createGlobalStyle`
       background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)),
     url(${homepageBg});
   background-position: center;
-  /* background-repeat: no-repeat; */
   background-repeat: repeat;
   background-size: cover;
   position: relative;
-  /* z-index:-1000; */
   height:100vh;
   }
   ol, ul {

@@ -59,7 +59,7 @@ const getUser = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const query = { _id: "1234" }; // should be user id from the request
+  const query = { _id: "1234" };
   const result = await db.collection("users").findOne(query);
 
   const favouritesAnimeList = result?.profile?.favourites;
@@ -84,7 +84,7 @@ const addToFavourites = async (req, res) => {
   const { anime, id } = req.body;
 
   console.log(`dbH add to fav`, id);
-  const query = { _id: id }; // should be user id from the request
+  const query = { _id: id };
   const favouritedAnime = {
     $addToSet: { "profile.favourites": anime },
   };
@@ -112,7 +112,7 @@ const getFavourites = async (req, res) => {
   try {
     await client.connect();
     const db = client.db("finalProject");
-    const query = { _id: id }; // should be user id from the request
+    const query = { _id: id };
     const result = await db.collection("users").findOne(query);
 
     const favouritesAnimeList = result?.profile?.favourites;
@@ -148,7 +148,7 @@ const updateUserLists = async (req, res) => {
     console.log(`the string list is`, list);
 
     const removedAnime = {
-      $pull: { [list]: { mal_id: Number(anime.mal_id) } }, // should be anime id
+      $pull: { [list]: { mal_id: Number(anime.mal_id) } },
     };
 
     const deletedAnime = await db
@@ -207,7 +207,7 @@ const getProfileBanner = async (req, res) => {
   await client.connect();
   const db = client.db("finalProject");
   const { id } = req.params;
-  const query = { _id: id }; // should be user id from the request
+  const query = { _id: id };
   const result = await db.collection("users").findOne(query);
 
   result
@@ -236,7 +236,7 @@ const deleteFromFavourites = async (req, res) => {
     console.log(`the string list is`, list);
 
     const removedAnime = {
-      $pull: { [list]: { mal_id: Number(anime.mal_id) } }, // should be anime id
+      $pull: { [list]: { mal_id: Number(anime.mal_id) } },
     };
 
     const deletedAnime = await db
@@ -293,7 +293,7 @@ const getWatchlist = async (req, res) => {
     const db = client.db("finalProject");
     const { id } = req.params;
     console.log(`dbH add to wl`, id);
-    const query = { _id: id }; // should be user id from the request
+    const query = { _id: id };
     const result = await db.collection("users").findOne(query);
 
     const watchlistAnimeList = result?.profile?.watchlist;
@@ -319,9 +319,9 @@ const deleteFromWatchlist = async (req, res) => {
   await client.connect();
   const db = client.db("finalProject");
   try {
-    const query = { _id: "1234" }; // should be user id from the request
+    const query = { _id: "1234" };
     const value = {
-      $pull: { "profile.watchlist": { name: "kokoro-watchlist" } }, // should be anime id
+      $pull: { "profile.watchlist": { name: "kokoro-watchlist" } },
     };
 
     const deletedAnime = await db
@@ -375,7 +375,7 @@ const getHistory = async (req, res) => {
     await client.connect();
     const db = client.db("finalProject");
     const { id } = req.params;
-    const query = { _id: id }; // should be user id from the request
+    const query = { _id: id };
     const result = await db.collection("users").findOne(query);
 
     const historyAnimeList = result?.profile?.history;
@@ -401,9 +401,9 @@ const deleteFromHistory = async (req, res) => {
   await client.connect();
   const db = client.db("finalProject");
   try {
-    const query = { _id: "1234" }; // should be user id from the request
+    const query = { _id: "1234" };
     const value = {
-      $pull: { "profile.history": { name: "mob" } }, // should be anime id
+      $pull: { "profile.history": { name: "mob" } },
     };
 
     const deletedAnime = await db
@@ -431,13 +431,10 @@ const addRatings = async (req, res) => {
   await client.connect();
   const db = client.db("finalProject");
   const { user_id, anime_id, rating } = req.body;
-  // console.log(`addRatins`, req.body);
   const query = { user_id: user_id, anime_id: Number(anime_id) };
 
   try {
     const isRated = await db.collection("ratings").findOne(query);
-
-    // console.log(`is rated `, isRated, typeof isRated);
 
     if (isRated) {
       const updateAnimeRating = await db
@@ -498,7 +495,7 @@ const updateRatings = async (req, res) => {
   const query = {
     _id: "1234",
     name: "mob",
-  }; // should be user id from the request
+  };
   const value = {
     $set: req.body,
   };
@@ -548,7 +545,7 @@ const getComments = async (req, res) => {
   const db = client.db("finalProject");
   console.log(`Params `, req.params);
   const { anime_id } = req.params;
-  const query = { anime_id: Number(anime_id) }; // should be user id from the request
+  const query = { anime_id: Number(anime_id) };
   const result = await db.collection("comments").find(query).toArray();
 
   result
@@ -568,7 +565,7 @@ const deleteComment = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
   await client.connect();
   const db = client.db("finalProject");
-  const query = { _id: "12" }; // should be user id from the request
+  const query = { _id: "12" };
   const result = await db.collection("comments").deleteOne(query);
 
   result

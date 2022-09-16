@@ -19,14 +19,9 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const HeaderContainer = styled.div`
-  /* border: 1px pink solid; */
-  /* height: 5vh; */
-`;
+const HeaderContainer = styled.div``;
 
 const MainContent = styled.div`
-  /* border: 1px blue solid; */
-  /* height: 100vh; */
   display: flex;
   justify-content: center;
 `;

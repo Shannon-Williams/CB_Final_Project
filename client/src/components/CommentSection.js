@@ -6,20 +6,14 @@ import { GoTriangleRight, GoTriangleDown } from "react-icons/go";
 const CommentSection = ({ comments, fetchCommentSection }) => {
   const [open, setOpen] = useState(false);
   let { user } = useAuth0();
-  console.log(`Comment Sections,`, comments);
-
-  console.log(`comment section`, user);
-
   return (
     <Wrapper>
       <CommentTitle
         onClick={() => {
           setOpen(!open);
-          // fetchCommentSection();
         }}
       >
         <ReviewTitle>
-          {" "}
           {open ? <GoTriangleDown /> : <GoTriangleRight />}Reviews
         </ReviewTitle>
       </CommentTitle>
@@ -64,7 +58,6 @@ const ImagePlaceHolder = styled.img`
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  /* background-color: gray; */
 `;
 
 const UserCommentContainer = styled.div`

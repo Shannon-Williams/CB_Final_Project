@@ -240,19 +240,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1)),
-    url(${homepageBg});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-repeat: repeat;
-  background-size: cover;
-  position: relative; */
-  /* height: 100%; */
 `;
 
-const ListContainer = styled.div`
-  /* border: 1px solid black; */
-`;
+const ListContainer = styled.div``;
 
 const ProfileSubmitButton = styled.button`
   color: var(--black);
@@ -274,7 +264,6 @@ const ProfileBannerImage = styled.img`
   width: auto;
   max-width: 100vw;
   object-fit: cover;
-  /* width: 100vw; */
 `;
 
 const ProfileBannerContainer = styled.div`
@@ -282,10 +271,7 @@ const ProfileBannerContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid pink; */
   width: 100vw;
-  /* margin: 0 0 1rem 0; */
-  /* background: var(--black); */
 `;
 
 const Background = styled.div`
@@ -294,16 +280,8 @@ const Background = styled.div`
   width: 100vw;
   justify-content: center;
   padding: 1rem 0 0 0;
-  /* margin: 0 0 1.5rem 0; */
-  /* border: 1px solid white; */
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-`;
-
-const LoadingTest = styled.div`
-  width: 100vw;
-  background: red;
-  border: 5px solid pink;
 `;
 
 const FileInput = styled.input`

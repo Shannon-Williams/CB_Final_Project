@@ -1,5 +1,4 @@
 import { Image } from "./styled/AnimeCard.styled";
-// import StyledAnimeCard, { Image } from "./styled/AnimeCard.styled";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import FavouriteButton from "./FavouriteButton";
@@ -32,8 +31,6 @@ const AnimeCard = ({
   let profileId = useParams().profileTypeId;
   profileTypeId = profileTypeId ? profileTypeId : profileId;
 
-  // console.log(`animecare`, profileTypeId);
-
   const postToFavourties = async () => {
     console.log(`Anime is this`, anime);
     const res = await fetch(`/api/favourite`, {
@@ -50,7 +47,6 @@ const AnimeCard = ({
     setLoading(true);
     setHasBeenRemoved(true);
     if (profileTypeId === "favourites") {
-      // setLoading(true);
       const res = await fetch(`/api/favourite`, {
         method: "PATCH",
         headers: {
@@ -63,12 +59,9 @@ const AnimeCard = ({
           profileTypeId: profileTypeId,
         }),
       });
-      // fetchFavourtieProfile();
       fetchAllLists();
-      // setLoading(false);
     } else {
       setLoading(true);
-      // setLoading(true);
       const res = await fetch(`/api/${profileTypeId}`, {
         method: "PATCH",
         headers: {
@@ -82,9 +75,7 @@ const AnimeCard = ({
         }),
       });
       fetchAllLists();
-      // setLoading(false);
     }
-    // refreshPage();
   };
 
   const postToHistory = async () => {
@@ -111,7 +102,6 @@ const AnimeCard = ({
     });
   };
 
-  // return !loading ? (
   return (
     <Container>
       <Wrapper hasBeenRemoved={hasBeenRemoved}>
@@ -139,7 +129,6 @@ const AnimeCard = ({
           onMouseLeave={() => {
             setFilter(true);
           }}
-          // filter={filter}
           filter={filter ? 1 : 0}
         >
           {profileTypeId && <RemoveButton onClickFunc={updateUserLists} />}
@@ -150,11 +139,6 @@ const AnimeCard = ({
       )}
     </Container>
   );
-  // : (
-  //   <StyledAnimeCard>
-  //     <LoadingScreen />
-  //   </StyledAnimeCard>
-  // );
 };
 
 export default AnimeCard;
@@ -166,7 +150,6 @@ const TestLoading = styled.div`
 `;
 
 const Wrapper = styled.div`
-  /* position: relative; */
   display: ${(props) => (props.hasBeenRemoved ? "none" : "inital")};
 
   & :hover {
@@ -182,27 +165,20 @@ const StyledAnimeCard = styled.li`
   flex-direction: column;
   border-radius: 10px;
   overflow: hidden;
-  /* border: 1px solid green; */
   width: 250px;
   border: 3px solid var(--white);
   outline-offset: 1px;
   outline: 3px solid var(--black);
-  /* height: 215px; */
 
   filter: grayscale(${(props) => (props.filter ? `${100}` : 0)});
-  /* filter: grayscale(100%); */
   & :hover {
     transform: scale(1.05);
     cursor: pointer;
-    /* transform: translateY(-0.8rem);
-    box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.3); */
   }
 `;
 
 const ButtonContainer = styled.div`
   display: ${(props) => (props.filter ? "none" : "flex")};
-  /* display: ${(props) => (props.filter ? "flex" : "none")}; */
-  /* display: flex; */
   flex-direction: column;
   position: absolute;
   top: 0;
@@ -214,59 +190,4 @@ const ButtonContainer = styled.div`
 const Container = styled.div`
   position: relative;
 `;
-
-const StyledFavouriteButton = styled.div`
-  width: 300px;
-  /* margin: 50px auto; */
-  background: #00bfb6;
-  padding: 20px;
-  text-align: center;
-  font-weight: 900;
-  color: #fff;
-  font-family: arial;
-  position: relative;
-  z-index: 1;
-
-  &::before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 10px solid #00bfb6;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #00bfb6;
-    border-bottom: 10px solid transparent;
-    left: 19px;
-    bottom: -19px;
-  }
-`;
-
-const StyledHistoryButtonContainer = styled.div`
-  /* width: 300px; */
-  /* margin: 50px auto; */
-  background: #00bfb6;
-  padding: 20px;
-  text-align: center;
-  font-weight: 900;
-  color: #fff;
-  font-family: arial;
-  position: relative;
-  z-index: 1;
-  left: 0px;
-  bottom: -100px;
-
-  &::before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 10px solid #00bfb6;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #00bfb6;
-    border-bottom: 10px solid transparent;
-    left: 19px;
-    bottom: -19px;
-  }
-`;
-
 const Images = styled.img``;

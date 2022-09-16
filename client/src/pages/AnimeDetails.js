@@ -12,7 +12,6 @@ import HistoryButton from "../components/HistoryButton";
 import Watchlist from "../components/WatchlistButton";
 import homepageBg from "../assets/biganime.png";
 import { useAuth0 } from "@auth0/auth0-react";
-import Tippy from "@tippyjs/react";
 import LoadingScreen from "../components/LoadingScreen";
 
 const AnimeDetails = () => {
@@ -159,21 +158,17 @@ const AnimeDetails = () => {
 export default AnimeDetails;
 
 const Wrapper = styled.div`
-  /* border: 1px solid blue; */
   width: 100%;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
     url(${homepageBg});
   background-position: center;
-  /* background-repeat: no-repeat; */
   background-repeat: repeat;
   background-size: cover;
-  /* position: relative; */
 `;
 
 const DetailContainer = styled.div`
   width: 1000px;
   margin: 1rem auto;
-  /* padding: 1rem; */
   background-color: var(--white);
   border-radius: 10px;
   border: 2px solid var(--black);
@@ -200,9 +195,7 @@ const P = styled.p`
 
 const AnimeOverviewContainer = styled.div`
   display: flex;
-  /* gap: 0.25rem; */
   justify-content: space-between;
-  /* padding: 0 0.25rem; */
 `;
 const Overview = styled.div`
   display: flex;
@@ -213,9 +206,7 @@ const Overview = styled.div`
   padding: 1rem;
 `;
 
-const EmbeddedVideo = styled(YoutubeEmbed)`
-  /* margin-top: 2rem; */
-`;
+const EmbeddedVideo = styled(YoutubeEmbed)``;
 
 const Details = styled.div`
   display: flex;
@@ -225,16 +216,13 @@ const Details = styled.div`
 `;
 
 const Synpopsis = styled.h3`
-  /* margin: 0.5rem 0; */
   margin: 0 0 0.25rem 0;
 `;
 const Summary = styled.div`
   padding: 1rem;
-  /* padding: 0 0 1rem 0; */
 `;
 
 const AngledLine = styled.div`
-  /* height: 50px; */
   width: 100%;
   transform: skew(0deg, 1deg);
   border-bottom: 2px solid var(--black);

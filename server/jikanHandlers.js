@@ -2,7 +2,6 @@ const fetch = require("node-fetch");
 
 const getAnimeSearchByQuery = async (req, res) => {
   const { q, genre } = req.query;
-  // const query = animeQuery.toLowercase();
   console.log(`Animesearch1 q`, q, `genre`, genre, `params`, req.query);
 
   const fetchAnimeSearch = async () => {
