@@ -11,28 +11,29 @@ Main Inspiration for the little project is my love for anime, My anime lists web
 1. User Authentication
 
 2. Explore Page
-   ⋅⋅\* Header to leader to profile, homepage and sign/singup functionality handled by Auth0
-   ⋅⋅\* Banner Image
-   ⋅⋅\* Search Bar > that displays all items as a card in the search that leaders to individual details page
 
-3.Profile Page
-⋅⋅\* Header
-⋅⋅\* Profile Banner that user can select
-⋅⋅\* Favourite section displaying all their selected Anime
-⋅⋅\* Watchlist section displaying all their selected Anime
-⋅⋅\* History section displaying all their selected Anime
+- Header to leader to profile, homepage and sign/singup functionality handled by Auth0
+- Banner Image
+- Search Bar > that displays all items as a card in the search that leaders to individual details page
+
+  3.Profile Page
+
+- Header
+- Profile Banner that user can select
+- Favourite section displaying all their selected Anime
+- Watchlist section displaying all their selected Anime
+- History section displaying all their selected Anime
 
 4. Anime Details Page
-   ⋅⋅\* Renders all relevant Anime details
-   ⋅⋅\* Comment section to display all comments
-   ⋅⋅\* Comment Post input to be able to right your post
-   ⋅⋅\* Anime Rating system to be able to rate that specific anime
+
+- Renders all relevant Anime details
+- Comment section to display all comments
+- Comment Post input to be able to right your post
+- Anime Rating system to be able to rate that specific anime
 
 # Database
 
-## MongoDB
-
-3 Collections
+###### MongoDB - 3 Collections
 
 **User Collection**
 
@@ -61,12 +62,14 @@ Hold the users profile information to be used on the profile page
 Holds user information and comment information to be user and displayed on the Anime Details Page
 
 ```javascript
-_id: uuid(),
+{
+  _id: uuid(),
 user_id: 'Auth0 Generated UID',
 anime_id: Number(animeId),
 comment: 'This anime is really cool',
 nickname: 'John',
 picture:'image by Auth0'
+}
 ```
 
 **Rating Collection**
@@ -74,17 +77,17 @@ picture:'image by Auth0'
 Holds user information and rating for a specific anime to be used and displayed on the Anime Details Page
 
 ```javascript
-_id:uuid(),
-user_id:'Auth0 Generated UID',
-anime_id:Number(animeId),
-rating: 5
+{
+  _id:uuid(),
+  user_id:'Auth0 Generated UID',
+  anime_id:Number(animeId),
+  rating: 5
+}
 ```
 
 # API
 
-- 3rd Party API
-
-o https://jikan.moe/ > Use to retrieve all information related to anime
+- 3rd Party API o https://jikan.moe/ > Use to retrieve all information related to anime
 
 - Internal API
 

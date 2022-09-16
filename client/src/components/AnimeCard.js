@@ -35,7 +35,6 @@ const AnimeCard = ({
   };
 
   const updateUserLists = async () => {
-    setLoading(true);
     setHasBeenRemoved(true);
     if (profileTypeId === "favourites") {
       await fetch(`/api/favourite`, {
@@ -50,7 +49,8 @@ const AnimeCard = ({
           profileTypeId: profileTypeId,
         }),
       });
-      fetchAllLists();
+      setLoading(true);
+      // fetchAllLists();
     } else {
       setLoading(true);
       await fetch(`/api/${profileTypeId}`, {
@@ -65,7 +65,7 @@ const AnimeCard = ({
           profileTypeId: profileTypeId,
         }),
       });
-      fetchAllLists();
+      // fetchAllLists();
     }
   };
 

@@ -106,11 +106,9 @@ const Profile = ({}) => {
   }, [user]);
 
   const fetchAllLists = () => {
-    // setHasBanner(false);
     fetchFavourtieProfile();
     fetchWatchlistProfile();
     fetchHistoryProfile();
-    // setHasList(true);
   };
 
   useEffect(() => {
