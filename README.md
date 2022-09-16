@@ -16,7 +16,7 @@ Main Inspiration for the little project is my love for anime, My anime lists web
 - Banner Image
 - Search Bar > that displays all items as a card in the search that leaders to individual details page
 
-  3.Profile Page
+3. Profile Page
 
 - Header
 - Profile Banner that user can select
