@@ -57,7 +57,7 @@ const CommentPost = ({ animeId, fetchCommentSection }) => {
             setComment(e.target.value);
           }}
           value={comment}
-          disabled={true}
+          disabled={user ? false : true}
         />
         <SubmitContainer>
           {user && (
