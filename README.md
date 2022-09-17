@@ -1,4 +1,4 @@
-# CB_Final_Project
+# Tenatively called: A.M.A.L.G.R.I - New ~~World~~ Website | All My Anime Lists Got Reincarnated Into a New ~~World~~ Website.
 
 Concordia Full Stack Developer Final Project -
 
