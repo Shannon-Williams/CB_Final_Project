@@ -113,6 +113,20 @@ Holds user information and rating for a specific anime to be used and displayed 
 | GET    | /api/history/:id        | Get a specific anime from a users watchlist                |
 | PATCH  | /api/history            | Get update the users history List                          |
 
+# Preview
+
+### Explore Page
+
+![alt text](preview\explore_page.png)
+
+### Anime Details Page
+
+![alt text](preview\anime_details.png)
+
+### Profile Page
+
+![alt text](preview\Profile_Page.png)
+
 # Challenges
 
 My main challenges involved managing expectations of myself for this project. At the begining of the project I was focused on doing things the **right** way and spent a lot of time researching architectures, file structures before even working on my application...I soon... realized that wasn't going to cut it. Additionally, I wasn't adhering to the MVP I was adding little feat
