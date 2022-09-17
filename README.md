@@ -117,15 +117,15 @@ Holds user information and rating for a specific anime to be used and displayed 
 
 ### Explore Page
 
-![alt text](preview\explore_page.png)
+![](preview\explore_page.png)
 
 ### Anime Details Page
 
-![alt text](preview\anime_details.png)
+![](preview\anime_details.png)
 
 ### Profile Page
 
-![alt text](preview\Profile_Page.png)
+![](preview\Profile_Page.png)
 
 # Challenges
 
