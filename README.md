@@ -2,7 +2,7 @@
 
 Concordia Full Stack Developer Final Project -
 
-Proposal: Anime search service where users can search and discover anime content and keep track of your anime watching. I chose this as a project because there currently these service provided aren't as fun visually, so I want to try create a fun looking simple alternative.
+Proposal: Anime search service where users can search and discover anime content and keep track of your anime watching. I chose this as a project because there currently these service provided aren't as fun visually, so I want to try create a fun looking simple alternative using React, NodeJS MongoDB.
 
 Main Inspiration for the little project is my love for anime, My anime lists website that I have previously used and I wanted to incorporate some features and components that I thought were cool that I learned from the bootcamp.
 
