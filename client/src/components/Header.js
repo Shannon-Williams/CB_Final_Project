@@ -9,7 +9,9 @@ const Header = () => {
   return (
     <Wrapper>
       <Link style={{ textDecoration: "none" }} to={`/`}>
-        <Logo>Final Project</Logo>
+        <Logo>
+          A.M.A.L.G.R.I - New <World>World</World> Website
+        </Logo>
       </Link>
       <ProfileContainer>
         {user && (
@@ -31,18 +33,12 @@ const Header = () => {
 export default Header;
 
 const Wrapper = styled.div`
-  /* border: 1px black solid; */
   height: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0.75rem;
   color: var(--white);
   background-color: var(--black);
-  /* background-color: rgba(0, 0, 0, 0.4); */
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1; */
   transition: all 7ms;
 
   &:hover {
@@ -78,4 +74,8 @@ const ProfileContainer = styled.div`
 const ProfileButtonsContainer = styled.div`
   display: flex;
   gap: 0.5rem;
+`;
+
+const World = styled.span`
+  text-decoration: line-through;
 `;
