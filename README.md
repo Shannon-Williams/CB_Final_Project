@@ -14,7 +14,7 @@ Main Inspiration for the little project is my love for anime, My anime lists web
 
 - Header to leader to profile, homepage and sign/singup functionality handled by Auth0
 - Banner Image
-- Search Bar > that displays all items as a card in the search that leaders to individual details page
+- Search Bar > that displays all items as a card in the search that leads to individual details page
 
 3. Profile Page
 
