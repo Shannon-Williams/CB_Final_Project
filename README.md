@@ -47,6 +47,10 @@ Main Inspiration for the little project is my love for anime, My anime lists web
 - `yarn or npm install`
 - `yarn or npm start`
 
+# Usage
+
+If you want to clone of fork a copy of the project for yourself, be sure to set up your MongoDB backend. You can use this most features without having the backend set up however your data will not be saved.
+
 # Database
 
 ###### MongoDB - 3 Collections
