@@ -31,6 +31,22 @@ Main Inspiration for the little project is my love for anime, My anime lists web
 - Comment Post input to be able to right your post
 - Anime Rating system to be able to rate that specific anime
 
+# Getting Started
+
+### Frontend
+
+- Open a terminal
+- `cd client`
+- `yarn or npm install`
+- `yarn or npm start`
+
+### Backend
+
+- Open a terminal
+- `cd server`
+- `yarn or npm install`
+- `yarn or npm start`
+
 # Database
 
 ###### MongoDB - 3 Collections
