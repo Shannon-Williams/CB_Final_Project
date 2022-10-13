@@ -42,14 +42,11 @@ Main Inspiration for the little project is my love for anime, My anime lists web
 
 ### Backend
 
-- Open a terminal
-- `cd server`
-- `yarn or npm install`
-- `yarn or npm start`
+Backend has been pushed live @ https://amalgri-backend-production-6837.up.railway.app/
 
 # Usage
 
-If you want to clone of fork a copy of the project for yourself, be sure to set up your MongoDB backend. You can use this most features without having the backend set up however your data will not be saved.
+If you want to clone of fork a copy of the project for yourself and install the frontend and you will have all features available to you using my MongoDB database.
 
 # Database
 
@@ -153,9 +150,9 @@ My main challenges involved managing expectations of myself for this project. At
 
 Below are some questions and concners that posed as challenges and delayed me that I had to overcome.
 
-**How to structure my own MongoDB database?** I struggled a lot trying to understand how I wanted all my data to **relate** in a non-relational database. While we had to use a MongoDB database for this project trying to **relate** data between collections without understanding the strucutre of my application first and how my data was going to be structured caused some delay and headaches.
+**How to structure my own MongoDB database?** I struggled a lot trying to understand how I wanted all my data to **relate** in a non-relational database. While we had to use a MongoDB database for this project trying to **relate** data between collections without understanding the strucutre of my application first and how my data was going to be structured caused some delay and headaches. I was able to overcome these challenges but having a detailed plan in place to better understand my data models.
 
-**How should my FE communicate with my third party API ? with my internal API ? How should my FE communicate with my BE ?** As I was thinking about how different parts of my application were going to interact, I started to think how am I going to integrate my 3rd party API I can call it from the frontend but my internal API was going to make request to my database and I wanted my backend to make requests to my 3rd party API.
+**How should my FE communicate with my third party API ? with my internal API ? How should my FE communicate with my BE ?** As I was thinking about how different parts of my application were going to interact, and trying to decided on an architecture, I started to think how am I going to integrate my 3rd party API I can call it from the frontend but my internal API was going to make request to my database and I wanted my backend to make requests to my 3rd party API.
 
 So I settled on FE will make requests to BE and BE will retrieve the data from my db or 3rd party API and the BE would serve up the response to the FE.
 
@@ -163,10 +160,8 @@ So I settled on FE will make requests to BE and BE will retrieve the data from m
 
 **JWTs and JWT Middleware Authetication??** I did not fully understand the concepts of JWTs and Middleware authentication on my backend for validation. While JWT validation didn't make the MVP I did spend a considerable amount of time writing and learning about it. These concepts will be used in the future.
 
-**Nested arrays in document objects in MongoDB** this goes without saying never using nested arrays in documents before and having to learn the operations to reach my data in my MongoDB took some time.
-
-**Design** While I am pretty confident that I can recreate a mockup given to me, I grossly underestimated the design on the application and only started considering it mid-project after my basic backend structure was complete and my FE was a white screen with a basic layout. And the integration between the two was dreadful now that I had to consider how the data would need to be presented, in the end I like my design choices but it would have saved me a lot of stress to consider at least some of these design elements in the beginning.
+**Design** While I am pretty confident that I can recreate a mockup given to me, I grossly underestimated the design on the application and only started considering it mid-project after my basic backend structure was complete and my FE was a white screen with a basic layout. And the integration between the two was difficult now that I had to consider how the data would need to be presented, in the end I like my design choices because I took the time to come up with a designbut it would have saved me a lot of stress to consider these design elements in the beginning.
 
 # Accomplishments
 
-**1st Full Stack Project** While this is a small project I take pride in it being my first. And although I had many challanges they were time based issues and not challenges because I lacked understanding, and I was able to deal with these challanges by planning and trying to adhere to what was set out in the MVP proposal.
+**1st Full Stack Project** While this is a small project I take pride in it being my first. And although I had many challanges they were time based issues and not challenges because I lacked understanding, and I was able to deal with these challanges by planning and adhering to what was set out in the my MVP proposal. Additionally, I am proud of my design I feel that individuals who consume anime content will appreciate my approach.
